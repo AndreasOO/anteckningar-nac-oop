@@ -1,12 +1,13 @@
 package ObjektorienteradProgrammering.Sprint1.Uppgift2_a_d;
 
-public class Car extends Vehicle implements Printable, Wheelborn {
+public class Bike extends Vehicle implements Printable, Wheelborn {
+
 
     private int numberOfGears;
     private int currentGear;
     private int numberOfWheels;
 
-    Car(int speedInKilometersPerHour, int weightInKilograms, int numberOfGears, int numberOfWheels) {
+    Bike(int speedInKilometersPerHour, int weightInKilograms, int numberOfGears, int numberOfWheels) {
         super(speedInKilometersPerHour, weightInKilograms);
         this.numberOfGears = numberOfGears;
         this.currentGear = 1;
@@ -16,16 +17,16 @@ public class Car extends Vehicle implements Printable, Wheelborn {
     @Override
     public void printMe() {
         System.out.println(String.format("Type of vehicle: %s \n" +
-                                         "Number of gears: %d \n" +
-                                         "Current gear: %d\n" +
-                                         "Speed in Kilometers per hour: %d\n" +
-                                         "Weight in Kilograms: %d \n" +
-                                         "Number of wheels: %d\n" , this.getClass().getSimpleName(),
-                                                                        this.numberOfGears,
-                                                                        this.currentGear,
-                                                                        super.getSpeedInKilometersPerHour(),
-                                                                        super.getWeightInKilograms(),
-                                                                        this.numberOfWheels));
+                        "Number of gears: %d \n" +
+                        "Current gear: %d\n" +
+                        "Speed in Kilometers per hour: %d\n" +
+                        "Weight in Kilograms: %d \n" +
+                        "Number of wheels: %d\n" , this.getClass().getSimpleName(),
+                this.numberOfGears,
+                this.currentGear,
+                super.getSpeedInKilometersPerHour(),
+                super.getWeightInKilograms(),
+                this.numberOfWheels));
     }
 
     public int getNumberOfWheels() {
@@ -39,6 +40,7 @@ public class Car extends Vehicle implements Printable, Wheelborn {
             System.out.println("Invalid Gear");
         }
     }
+
 
     public void setNumberOfGears(int numberOfGears) {
         this.numberOfGears = numberOfGears;

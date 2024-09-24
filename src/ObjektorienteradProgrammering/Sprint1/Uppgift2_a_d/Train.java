@@ -1,6 +1,6 @@
 package ObjektorienteradProgrammering.Sprint1.Uppgift2_a_d;
 
-public class Train extends Vehicle {
+public class Train extends Vehicle implements Printable {
     private int numberOfCarts;
 
     Train(int speedInKilometersPerHour, int weightInKilograms, int numberOfCarts) {

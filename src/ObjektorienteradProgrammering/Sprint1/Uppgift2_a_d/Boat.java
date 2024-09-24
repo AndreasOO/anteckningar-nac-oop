@@ -1,6 +1,6 @@
 package ObjektorienteradProgrammering.Sprint1.Uppgift2_a_d;
 
-public class Boat extends Vehicle {
+public class Boat extends Vehicle implements Printable {
     private int deadWeight;
 
     Boat(int speedInKilometersPerHour, int weightInKilograms, int deadWeight) {
