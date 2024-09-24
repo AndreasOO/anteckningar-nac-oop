@@ -9,26 +9,12 @@ public class Main {
 //        char ch = 1;
 //        System.out.println((char) (ch+96));
 
-        int num = 420;
+        String bis = "11010101010101";
 
-        String numStr = String.valueOf(num);
-        ArrayList<String> res = new ArrayList<>();
+        bis = bis.replaceAll("0", "");
 
-        for (int i = 0; i < numStr.length(); i++) {
-            res.add(numStr.substring(0, i + 1));
-        }
-
-        String[] res2 = res.stream().map(String::new).toArray(String[]::new);
-
-
-        for (String ele : res2) {
-            System.out.println(ele);
-            
-        }
-
-
-
-
+        System.out.println(Integer.parseUnsignedInt(bis, 2));
+        System.out.println(Long.parseLong(bis, 2));
 
 
     }
