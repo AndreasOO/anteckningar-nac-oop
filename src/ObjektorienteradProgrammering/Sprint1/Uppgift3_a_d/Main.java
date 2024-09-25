@@ -5,13 +5,15 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+
+        List<Student> listOfStudents = new ArrayList<>();
+
+
         String firstName = "Andy";
         String lastName = "Warhol";
         int age = 25;
         String legalGender = "Male";
         Student studentOne = new Student(firstName, lastName, age, legalGender);
-
-
 
         firstName = "Chrissy";
         lastName = "Maximus";
@@ -25,6 +27,9 @@ public class Main {
         legalGender = "Male";
         Student studentThree = new Student(firstName, lastName, age, legalGender);
 
+        listOfStudents.add(studentOne);
+        listOfStudents.add(studentTwo);
+        listOfStudents.add(studentThree);
 
 
         firstName = "Priscilla";
@@ -38,6 +43,7 @@ public class Main {
         String courseDescription = "Best course ever";
         Course courseOne = new Course(courseName, courseDescription);
         courseOne.printMe();
+        courseOne.setCourseTeacher(teacher);
 
         courseName = "C#";
         courseDescription = "Buuu you suck";
@@ -63,14 +69,56 @@ public class Main {
         Participation participationNine = new Participation(studentThree, courseThree);
 
 
-        List<Participation> list1 = new ArrayList<>();
-        list1.add(participationOne);
-        list1.add(participationTwo);
-        list1.add(participationThree);
+        List<Participation> listOfCourseParticipants = new ArrayList<>();
+        listOfCourseParticipants.add(participationOne);
+        listOfCourseParticipants.add(participationTwo);
+        listOfCourseParticipants.add(participationThree);
+        listOfCourseParticipants.add(participationFour);
+        listOfCourseParticipants.add(participationFive);
+        listOfCourseParticipants.add(participationSix);
+        listOfCourseParticipants.add(participationSeven);
+        listOfCourseParticipants.add(participationEight);
+        listOfCourseParticipants.add(participationNine);
 
 
+        printCoursesTakenByStudent
+                (studentOne, listOfCourseParticipants);
 
 
+        printTeacherAndStudentsTakingCourse(courseOne, listOfCourseParticipants);
+
+
+        System.out.println("BIG PRINT FUNCTION");
+        printCoursesTakenBySeveralStudents(listOfStudents, listOfCourseParticipants);
 
     }
+
+    private static void printTeacherAndStudentsTakingCourse(Course courseOne, List<Participation> listOfCourseParticipants) {
+        System.out.println("Course teacher in " + courseOne.toString() +": " + courseOne.getCourseTeacher());
+        System.out.println("Students taking " + courseOne.getNameOfCourse() + ":");
+        for (Participation participation : listOfCourseParticipants) {
+            if (participation.getCourse().equals(courseOne)) {
+                System.out.println(participation.getStudent());
+            }
+        }
+        System.out.println("\n");
+    }
+
+    private static void printCoursesTakenByStudent
+            (Student studentOne, List<Participation> listOfCourseParticipants) {
+        System.out.println("Courses taken by " + studentOne.toString());
+        for (Participation participation : listOfCourseParticipants) {
+            if (participation.getStudent().equals(studentOne)) {
+                System.out.println(participation.getCourse());
+            }
+        }
+        System.out.println("\n");
+    }
+
+    private static void printCoursesTakenBySeveralStudents(List<Student> listOfStudents, List<Participation> listOfCourseParticipants) {
+        for (Student student : listOfStudents) {
+            printCoursesTakenByStudent(student, listOfCourseParticipants);
+        }
+    }
+    
 }
