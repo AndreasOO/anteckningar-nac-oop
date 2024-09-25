@@ -42,17 +42,19 @@ public class Main {
         String courseName = "Java";
         String courseDescription = "Best course ever";
         Course courseOne = new Course(courseName, courseDescription);
-        courseOne.printMe();
         courseOne.setCourseTeacher(teacher);
+        courseOne.printMe();
 
         courseName = "C#";
         courseDescription = "Buuu you suck";
         Course courseTwo = new Course(courseName, courseDescription);
+        courseTwo.setCourseTeacher(teacher);
         courseTwo.printMe();
 
         courseName = "Python";
         courseDescription = "Too easy";
         Course courseThree = new Course(courseName, courseDescription);
+        courseThree.setCourseTeacher(teacher);
         courseThree.printMe();
 
 
