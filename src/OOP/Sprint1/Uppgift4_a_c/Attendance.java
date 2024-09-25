@@ -15,7 +15,7 @@ public class Attendance {
         this.course = participation.getCourse();
     }
 
-    public static Attendance getAttendance(Participation participation, String lesson) {
+    public static Attendance getAttendancePresent(Participation participation, String lesson) {
         Attendance attendance = new Attendance(participation);
         attendance.lesson = lesson;
         attendance.attended = true;
@@ -23,7 +23,7 @@ public class Attendance {
         return attendance;
     }
 
-    public static Attendance getAbsence(Participation participation,String lesson) {
+    public static Attendance getAttendanceAbsent(Participation participation,String lesson) {
         Attendance attendance = new Attendance(participation);
         attendance.lesson = lesson;
         attendance.attended = false;

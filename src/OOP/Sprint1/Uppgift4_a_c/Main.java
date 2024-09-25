@@ -1,6 +1,5 @@
 package OOP.Sprint1.Uppgift4_a_c;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,7 +101,7 @@ public class Main {
 
         for (Participation participation : listOfCourseParticipants) {
             for (String lesson : participation.getCourse().getLessons()) {
-                courseAdmin.addToAttendenceList(Attendance.getAttendance(participation, lesson));
+                courseAdmin.addToAttendanceList(Attendance.getAttendancePresent(participation, lesson));
             }
         }
 
@@ -113,6 +112,15 @@ public class Main {
 
 
 
+        for (Participation participation : listOfCourseParticipants) {
+            for (String lesson : participation.getCourse().getLessons()) {
+                courseAdmin.addToAttendanceList(Attendance.getAttendanceAbsent(participation, lesson));
+            }
+        }
+
+        for (Attendance attendance : courseAdmin.getAttendenceList()) {
+            System.out.println(attendance);
+        }
 
 
     }

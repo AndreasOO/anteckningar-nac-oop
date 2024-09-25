@@ -37,25 +37,8 @@ public class Course {
         this.courseTeacher = courseTeacher;
     }
 
-    public void setNameOfCourse(String nameOfCourse) {
-        this.nameOfCourse = nameOfCourse;
-    }
-
-    public void setCourseDescription(String courseDescription) {
-        this.courseDescription = courseDescription;
-    }
-
     public String getNameOfCourse() {
         return nameOfCourse;
-    }
-
-    public String getCourseDescription() {
-        return courseDescription;
-    }
-
-
-    public Teacher getCourseTeacher() {
-        return courseTeacher;
     }
 
     @Override

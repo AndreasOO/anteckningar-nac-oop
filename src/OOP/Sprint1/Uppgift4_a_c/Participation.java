@@ -1,19 +1,11 @@
 package OOP.Sprint1.Uppgift4_a_c;
 
 public class Participation {
-    private Student student;
-    private Course course;
+    private final Student student;
+    private final Course course;
 
     Participation(Student student, Course course) {
         this.student = student;
-        this.course = course;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
-    public void setCourse(Course course) {
         this.course = course;
     }
 
