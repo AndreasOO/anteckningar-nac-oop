@@ -1,7 +1,4 @@
-package ObjektorienteradProgrammering.Sprint1.Uppgift3_a_d;
-
-import java.util.ArrayList;
-import java.util.List;
+package OOP.Sprint1.Uppgift3_a_d;
 
 public class Student extends Person {
     private static int studentIDCounter = 1;

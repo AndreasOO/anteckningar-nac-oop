@@ -1,4 +1,4 @@
-package ObjektorienteradProgrammering.Sprint1.Uppgift1_a_c;
+package OOP.Sprint1.Uppgift1_a_c;
 
 public class CarOwner extends Person {
     Car ownedCar;

@@ -1,12 +1,13 @@
-package ObjektorienteradProgrammering.Sprint1.Uppgift3_a_d;
+package OOP.Sprint1.Uppgift4_a_c;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Course {
-    String nameOfCourse;
-    String courseDescription;
-    Teacher courseTeacher;
+    private String nameOfCourse;
+    private String courseDescription;
+    private Teacher courseTeacher;
+    private List<String> lessons;
 
 
     Course(String nameOfCourse, String courseDescription) {
@@ -24,7 +25,13 @@ public class Course {
                 this.courseTeacher));
     }
 
+    public List<String> getLessons() {
+        return lessons;
+    }
 
+    public void setLessons(List<String> lessons) {
+        this.lessons = lessons;
+    }
 
     public void setCourseTeacher(Teacher courseTeacher) {
         this.courseTeacher = courseTeacher;

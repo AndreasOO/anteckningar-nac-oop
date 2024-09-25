@@ -1,4 +1,4 @@
-package ObjektorienteradProgrammering.Sprint1.Uppgift2_a_d;
+package OOP.Sprint1.Uppgift2_a_d;
 
 abstract public class Vehicle {
     private int speedInKilometersPerHour;

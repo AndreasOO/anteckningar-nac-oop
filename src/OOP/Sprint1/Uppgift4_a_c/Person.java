@@ -1,4 +1,4 @@
-package ObjektorienteradProgrammering.Sprint1.Uppgift3_a_d;
+package OOP.Sprint1.Uppgift4_a_c;
 
 public abstract class Person {
     private String firstName;
