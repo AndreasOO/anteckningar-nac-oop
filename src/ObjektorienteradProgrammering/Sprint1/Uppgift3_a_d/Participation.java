@@ -9,11 +9,6 @@ public class Participation {
         this.course = course;
     }
 
-
-
-
-
-
     public void setStudent(Student student) {
         this.student = student;
     }
