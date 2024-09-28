@@ -1,5 +1,6 @@
 package OOP.Sprint1.Uppgift10;
 
 public interface InterestBearing {
-    int getInterestRateInPercent();
+    double getInterestRateInPercent();
+    void setNewInterestRateInPercent(double newInterestRateInPercent);
 }

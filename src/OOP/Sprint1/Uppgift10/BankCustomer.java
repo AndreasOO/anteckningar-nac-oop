@@ -7,7 +7,7 @@ public class BankCustomer extends Person {
 
     private static int customerIDCounter = 1;
     private final int customerID;
-    List<Loans> loansList;
+    List<Loan> loansList;
     List<Account> accountsList;
 
     public BankCustomer(String name, int personalNumber) {

@@ -4,21 +4,31 @@ public class Account implements InterestBearing {
     private static int accountNumberCounter = 500;
 
     private final int accountNumber;
-    private double balance;
-    private int interestRate;
+    private double accountBalance;
+    private double accountInterestRateInPercentage;
+    private BankCustomer accountOwner;
 
-    Account(double balance, int interestRate) {
+    protected Account(double accountBalance, int accountInterestRate) {
         this.accountNumber = accountNumberCounter++;
-        this.balance = balance;
-        this.interestRate = interestRate;
-    }
-
-
-    public int getInterestRateInPercent() {
-        return interestRate;
+        this.accountBalance = accountBalance;
+        this.accountInterestRateInPercentage = accountInterestRate;
     }
 
     public int getAccountNumber() {
         return accountNumber;
+    }
+
+    protected void setAccountOwner(BankCustomer accountOwner) {
+        this.accountOwner = accountOwner;
+    }
+
+    @Override
+    public double getInterestRateInPercent() {
+        return accountInterestRateInPercentage;
+    }
+
+    @Override
+    public void setNewInterestRateInPercent(double newAccountInterestRateInPercentage) {
+        this.accountInterestRateInPercentage = newAccountInterestRateInPercentage;
     }
 }
