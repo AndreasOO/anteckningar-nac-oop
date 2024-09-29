@@ -1,6 +1,8 @@
 package OOP.Sprint1.Uppgift10;
 
 public class Loan implements InterestBearing {
+    private static int loanIDCounter = 400;
+    private final int loanID;
     private final double initialLoanPrincipal;
     private double currentLoanPrincipal;
     private double loanInterestRateInPercent;
@@ -8,6 +10,7 @@ public class Loan implements InterestBearing {
     BankStaff bankStaffApprovingLoan;
 
     protected Loan(double initialLoanPrincipal, double loanInterestRateInPercent) {
+        this.loanID = loanIDCounter++;
         this.initialLoanPrincipal = initialLoanPrincipal;
         this.loanInterestRateInPercent = loanInterestRateInPercent;
     }
@@ -20,6 +23,10 @@ public class Loan implements InterestBearing {
         this.bankStaffApprovingLoan = bankStaffApprovingLoan;
     }
 
+
+    public int getLoanID() {
+        return loanID;
+    }
 
     @Override
     public double getInterestRateInPercent() {

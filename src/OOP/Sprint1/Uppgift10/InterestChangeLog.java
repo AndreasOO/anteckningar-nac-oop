@@ -4,34 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InterestChangeLog implements ChangeLogItemHandler {
-    List<InterestRateAccountChangeLogItem> changeLogItems;
+    List<ChangeLogItem> changeLogItems;
 
     public InterestChangeLog() {
         changeLogItems = new ArrayList<>();
     }
 
     public void addItemToChangeLog(ChangeLogItem changeLogItem) {
-        if (changeLogItem instanceof InterestRateAccountChangeLogItem interestRateChangeLogItem) {
-            changeLogItems.add(interestRateChangeLogItem);
-//        } else {
-//            throw new IllegalClassFormatException();
-            //TODO add exception handling in this or calling class
-        }
+            changeLogItems.add(changeLogItem);
     }
 
     public void printChangeLogItem(ChangeLogItem changeLogItem) {
-        if (changeLogItem instanceof InterestRateAccountChangeLogItem interestRateChangeLogItem) {
-            System.out.println(interestRateChangeLogItem);
-            //TODO actual print method in item class
-        }
+        System.out.println(changeLogItem.getLogContent());
     }
 
+    // TODO fix sorting with comparator class and date comparison of the time of change variable.
     public void printChronologicalChangeHistory() {
-        for (InterestRateAccountChangeLogItem interestRateChangeLogItem : changeLogItems) {
-            System.out.println(interestRateChangeLogItem);
-            //TODO actual print method in item class
+        for (ChangeLogItem changeLogItem : changeLogItems) {
+            printChangeLogItem(changeLogItem);
         }
-
     }
 
 }

@@ -16,4 +16,9 @@ public class InterestRateAccountChangeLogItem extends ChangeLogItem {
     }
 
 
+    public String getLogContent() {
+        return String.format("getting log content of account log item");
+    }
+
+
 }

@@ -20,4 +20,6 @@ public abstract class ChangeLogItem {
     public Date getTimeOfChange() {
         return this.timeOfChange;
     }
+
+    public abstract String getLogContent();
 }
