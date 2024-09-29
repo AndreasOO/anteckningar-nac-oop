@@ -1,12 +1,19 @@
-package OOP.Sprint1.Uppgift10;
+package OOP.Sprint1.Uppgift10.ChangeLog;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class InterestChangeLog implements ChangeLogItemHandler {
+public class ChangeLog implements ChangeLogItemHandler {
     List<ChangeLogItem> changeLogItems;
 
-    public InterestChangeLog() {
+    // Singleton pattern
+    private static final ChangeLog INTEREST_CHANGE_LOG = new ChangeLog();
+    // Singleton pattern
+    public static ChangeLog getInstance(){
+        return INTEREST_CHANGE_LOG;
+    }
+
+    private ChangeLog() {
         changeLogItems = new ArrayList<>();
     }
 
@@ -24,5 +31,7 @@ public class InterestChangeLog implements ChangeLogItemHandler {
             printChangeLogItem(changeLogItem);
         }
     }
+
+    //TODO add print methods for specific changeLogItem classes, a filter on instanceof
 
 }

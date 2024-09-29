@@ -1,4 +1,4 @@
-package OOP.Sprint1.Uppgift10;
+package OOP.Sprint1.Uppgift10.ChangeLog;
 
 import java.util.Calendar;
 import java.util.Date;

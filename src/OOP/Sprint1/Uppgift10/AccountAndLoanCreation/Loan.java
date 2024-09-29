@@ -1,28 +1,20 @@
-package OOP.Sprint1.Uppgift10;
+package OOP.Sprint1.Uppgift10.AccountAndLoanCreation;
 
 public class Loan implements InterestBearing {
     private static int loanIDCounter = 400;
     private final int loanID;
+    private int customerIDTakingLoan;
     private final double initialLoanPrincipal;
     private double currentLoanPrincipal;
     private double loanInterestRateInPercent;
-    BankCustomer bankCustomerTakingLoan;
-    BankStaff bankStaffApprovingLoan;
 
-    protected Loan(double initialLoanPrincipal, double loanInterestRateInPercent) {
+
+    protected Loan(double initialLoanPrincipal, double loanInterestRateInPercent, int customerIDTakingLoan) {
         this.loanID = loanIDCounter++;
         this.initialLoanPrincipal = initialLoanPrincipal;
         this.loanInterestRateInPercent = loanInterestRateInPercent;
+        this.customerIDTakingLoan = customerIDTakingLoan;
     }
-
-    protected void setBankCustomerTakingLoan(BankCustomer bankCustomerTakingLoan) {
-        this.bankCustomerTakingLoan = bankCustomerTakingLoan;
-    }
-
-    protected void setBankStaffApprovingLoan(BankStaff bankStaffApprovingLoan) {
-        this.bankStaffApprovingLoan = bankStaffApprovingLoan;
-    }
-
 
     public int getLoanID() {
         return loanID;
@@ -38,11 +30,7 @@ public class Loan implements InterestBearing {
         this.loanInterestRateInPercent = newLoanInterestRateInPercent;
     }
 
-    public BankCustomer getBankCustomerTakingLoan() {
-        return bankCustomerTakingLoan;
-    }
-
-    public BankStaff getBankStaffApprovingLoan() {
-        return bankStaffApprovingLoan;
+    public double getInitialLoanPrincipal() {
+        return initialLoanPrincipal;
     }
 }

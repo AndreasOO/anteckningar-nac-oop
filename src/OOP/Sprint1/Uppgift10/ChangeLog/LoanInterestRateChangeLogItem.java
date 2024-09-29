@@ -1,13 +1,16 @@
-package OOP.Sprint1.Uppgift10;
+package OOP.Sprint1.Uppgift10.ChangeLog;
 
-public class InterestRateLoanChangeLogItem extends ChangeLogItem {
+import OOP.Sprint1.Uppgift10.AccountAndLoanCreation.Loan;
+import OOP.Sprint1.Uppgift10.BankStaff;
+
+public class LoanInterestRateChangeLogItem extends ChangeLogItem {
     private final int employmentNumberOfBankStaffResponsibleForChange;
     private final int loanIDOfChangedInterest;
     private final double previousInterestRateInPercent;
     private final double newInterestRateInPercent;
 
 
-    public InterestRateLoanChangeLogItem(BankStaff bankStaff, Loan loan, double newInterestRateInPercent) {
+    protected LoanInterestRateChangeLogItem(BankStaff bankStaff, Loan loan, double newInterestRateInPercent) {
         super();
         this.employmentNumberOfBankStaffResponsibleForChange = bankStaff.getEmploymentID();
         this.loanIDOfChangedInterest = loan.getLoanID();
