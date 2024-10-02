@@ -1,7 +1,7 @@
 package OOP.Sprint1.Uppgift10.ChangeLog;
 
 import OOP.Sprint1.Uppgift10.AccountAndLoanCreation.Loan;
-import OOP.Sprint1.Uppgift10.BankStaff;
+import OOP.Sprint1.Uppgift10.PersonsCreation.BankStaff;
 
 public class LoanApprovalChangeLogItem extends ChangeLogItem {
     private final int employmentNumberOfBankStaffResponsibleForChange;
@@ -18,8 +18,22 @@ public class LoanApprovalChangeLogItem extends ChangeLogItem {
         this.initialLoanPrincipal = loan.getInitialLoanPrincipal();
     }
 
-    public String getLogContent() {
-        return String.format("getting log content of loan approval log item");
+    public String getLogItemContent() {
+        return String.format("Change Log item: %s -- Loan approval\n" +
+                        "Account created at %s\n" +
+                        "Responsible employee ID: %s\n" +
+                        "Loan ID number: %s\n" +
+                        "Approved interest rate: %s\n" +
+                        "Initial principal: %s\n", super.getChangeLogItemID(),
+                super.getTimeOfChange(),
+                this.employmentNumberOfBankStaffResponsibleForChange,
+                this.loanIDOfApprovedLoan,
+                this.approvedInterestRateInPercent,
+                this.initialLoanPrincipal);
+    }
+
+    public int getResponsibleEmployeeID() {
+        return this.employmentNumberOfBankStaffResponsibleForChange;
     }
 
 

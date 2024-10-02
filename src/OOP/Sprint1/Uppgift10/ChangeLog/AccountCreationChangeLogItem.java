@@ -1,7 +1,7 @@
 package OOP.Sprint1.Uppgift10.ChangeLog;
 
 import OOP.Sprint1.Uppgift10.AccountAndLoanCreation.Account;
-import OOP.Sprint1.Uppgift10.BankStaff;
+import OOP.Sprint1.Uppgift10.PersonsCreation.BankStaff;
 
 public class AccountCreationChangeLogItem extends ChangeLogItem {
     private final int employmentNumberOfBankStaffResponsibleForChange;
@@ -18,9 +18,23 @@ public class AccountCreationChangeLogItem extends ChangeLogItem {
         this.initialBalance = account.getAccountBalance();
     }
 
-    public String getLogContent() {
-        return String.format("getting log content of account creation log item");
+    @Override
+    public String getLogItemContent() {
+        return String.format("Change Log item: %s -- Account creation\n" +
+                             "Account created at %s\n" +
+                             "Responsible employee ID: %s\n" +
+                             "Account number: %s\n" +
+                             "Approved interest rate: %s\n" +
+                             "Initial balance: %s\n", super.getChangeLogItemID(),
+                                                      super.getTimeOfChange(),
+                                                      this.employmentNumberOfBankStaffResponsibleForChange,
+                                                      this.accountNumberOfCreatedAccount,
+                                                      this.approvedInterestRateInPercent,
+                                                      this.initialBalance);
     }
 
+    public int getResponsibleEmployeeID() {
+        return this.employmentNumberOfBankStaffResponsibleForChange;
+    }
 
 }

@@ -1,6 +1,6 @@
 package OOP.Sprint1.Uppgift10.AccountAndLoanCreation;
 
-public class Loan implements InterestBearing {
+public class Loan implements InterestBearing, Printable {
     private static int loanIDCounter = 400;
     private final int loanID;
     private int customerIDTakingLoan;
@@ -32,5 +32,9 @@ public class Loan implements InterestBearing {
 
     public double getInitialLoanPrincipal() {
         return initialLoanPrincipal;
+    }
+
+    public void printDetails() {
+        System.out.println(String.format("Loan ID: %s -- Principal: %s -- Interest Rate: %s", this.loanID, this.currentLoanPrincipal, this.loanInterestRateInPercent));
     }
 }

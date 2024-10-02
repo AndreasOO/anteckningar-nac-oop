@@ -6,7 +6,7 @@ import java.util.Date;
 public abstract class ChangeLogItem {
     private static int changeLogItemIDCounter = 1;
     private final int changeLogItemID;
-    private Date timeOfChange;
+    private final Date timeOfChange;
 
     public ChangeLogItem() {
         this.changeLogItemID = changeLogItemIDCounter++;
@@ -21,5 +21,7 @@ public abstract class ChangeLogItem {
         return this.timeOfChange;
     }
 
-    public abstract String getLogContent();
+    public abstract String getLogItemContent();
+
+    public abstract int getResponsibleEmployeeID();
 }

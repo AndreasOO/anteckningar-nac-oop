@@ -2,7 +2,7 @@ package OOP.Sprint1.Uppgift10.ChangeLog;
 
 import OOP.Sprint1.Uppgift10.AccountAndLoanCreation.Account;
 import OOP.Sprint1.Uppgift10.AccountAndLoanCreation.Loan;
-import OOP.Sprint1.Uppgift10.BankStaff;
+import OOP.Sprint1.Uppgift10.PersonsCreation.BankStaff;
 
 public class ChangeLogItemRegistrator {
     ChangeLogItemRegistrator(){

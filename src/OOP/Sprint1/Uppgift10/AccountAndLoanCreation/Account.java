@@ -1,6 +1,6 @@
 package OOP.Sprint1.Uppgift10.AccountAndLoanCreation;
 
-public class Account implements InterestBearing {
+public class Account implements InterestBearing, Printable {
     private static int accountNumberCounter = 500;
 
     private final int accountNumber;
@@ -33,5 +33,11 @@ public class Account implements InterestBearing {
 
     public double getAccountBalance() {
         return accountBalance;
+    }
+
+    public void printDetails() {
+        System.out.println(String.format("Account ID: %s -- Balance: %s -- Interest Rate: %s", this.accountNumber,
+                                                                                               this.accountBalance,
+                                                                                               this.accountInterestRateInPercentage));
     }
 }

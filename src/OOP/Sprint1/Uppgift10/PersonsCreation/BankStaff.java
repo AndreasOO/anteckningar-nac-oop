@@ -1,4 +1,4 @@
-package OOP.Sprint1.Uppgift10;
+package OOP.Sprint1.Uppgift10.PersonsCreation;
 
 import OOP.Sprint1.Uppgift10.AccountAndLoanCreation.Account;
 import OOP.Sprint1.Uppgift10.AccountAndLoanCreation.AccountCreator;
@@ -11,10 +11,10 @@ public class BankStaff extends Person {
     private static int employmentIDCounter = 10;
 
     private final int employmentID;
-    private double salary;
+    private final double salary;
 
-    public BankStaff(String name, int personalNumber, double salary) {
-        super(name,personalNumber);
+    public BankStaff(String name, double salary) {
+        super(name);
         this.employmentID = employmentIDCounter++;
         this.salary = salary;
     }
