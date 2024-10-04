@@ -27,16 +27,19 @@ public class CarMileage {
 
     public void getInputDrivenKilometersNow() {
         input = JOptionPane.showInputDialog("Input kilometers driven as of today");
+        validateUserInput();
         drivenKilometersNow = Double.parseDouble(input);
     }
 
     public void getInputDrivenKilometersOneYearAgo() {
         input = JOptionPane.showInputDialog("Input kilometers driven one year ago from today");
+        validateUserInput();
         drivenKilometersOneYearAgo = Double.parseDouble(input);
     }
 
     public void getInputGasolineConsumedSinceOneYear() {
         input = JOptionPane.showInputDialog("Input gasoline consumed since one year");
+        validateUserInput();
         gasolineConsumedSinceOneYear = Double.parseDouble(input);
     }
 
@@ -44,6 +47,12 @@ public class CarMileage {
         return String.format("Kilometers driven: %s\n" +
                 "Gasoline consumed: %s\n" +
                 "Mileage in liters per kilometer: %s", drivenKilometersNow-drivenKilometersOneYearAgo, gasolineConsumedSinceOneYear, calculateMileageInKilometersPerLiter());
+    }
+
+    public void validateUserInput() {
+        if (input.matches("[^0-9]")) {
+            throw new NumberFormatException();
+        }
     }
 
     public void showOutput() {
