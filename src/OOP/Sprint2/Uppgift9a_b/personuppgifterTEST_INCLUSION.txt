@@ -1,0 +1,16 @@
+Kalle Nilsson, Xvägen 1, 12345 Ystad
+25, 80, 200
+Mimmi Mattsson, Xvägen 2, 12345 Ystad
+25, 68, 200
+Rulle Rullson, Xvägen 3, 12345 Ystad
+56, 35, 200
+Putte Persson, Xvägen 4, 12345 Ystad
+27, 130, 200
+Micke Nilsson, Xvägen 5, 12345 Ystad
+31, 69, 201
+Nisse Nilsson, Xvägen 6, 12345 Ystad
+23, 80, 201
+Ville Wilhemsson, Xvägen 7, 12345 Ystad
+54, 123, 201
+Sune Samuelsson, Xvägen 8, 12345 Ystad
+38, 98, 199
