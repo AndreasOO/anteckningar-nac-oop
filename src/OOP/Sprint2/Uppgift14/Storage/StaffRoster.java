@@ -2,6 +2,10 @@ package OOP.Sprint2.Uppgift14.Storage;
 
 import OOP.Sprint2.Uppgift14.PersonsCreation.BankStaff;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,9 +37,20 @@ public class StaffRoster {
         staff.add(new BankStaff("Oaklyn Joder", 19220));
         staff.add(new BankStaff("Kyla Mortades", 75110));
 
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("src/OOP/Sprint2/Uppgift14/Storage/bankstaff.ser"))) {
+          for (BankStaff staff : staff) {
+              outputStream.writeObject(staff);
+          }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
-    protected static StaffRoster getInstance() {
+    public static StaffRoster getInstance() {
         return STAFF_ROSTER;
     }
 

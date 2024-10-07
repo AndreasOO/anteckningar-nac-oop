@@ -58,4 +58,10 @@ public class BankCustomer extends Person implements Serializable {
         System.out.println();
     }
 
+    @Override
+    public String toString() {
+        return "BankCustomer{" +
+                "customerID=" + customerID +
+                "} " + super.toString();
+    }
 }

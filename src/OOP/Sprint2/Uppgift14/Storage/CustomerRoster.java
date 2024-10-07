@@ -1,7 +1,12 @@
 package OOP.Sprint2.Uppgift14.Storage;
 
 import OOP.Sprint2.Uppgift14.PersonsCreation.BankCustomer;
+import OOP.Sprint2.Uppgift14.PersonsCreation.BankStaff;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,9 +35,19 @@ public class CustomerRoster {
         customers.add(new BankCustomer("Yerl Herl"));
         customers.add(new BankCustomer("Tacky Lacky"));
 
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("src/OOP/Sprint2/Uppgift14/Storage/bankcustomers.ser"))) {
+            for (BankCustomer customer : customers) {
+                outputStream.writeObject(customer);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
-    protected static CustomerRoster getInstance() {
+    public static CustomerRoster getInstance() {
         return CUSTOMER_ROSTER;
     }
 

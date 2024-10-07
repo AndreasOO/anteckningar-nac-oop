@@ -61,4 +61,11 @@ public class BankStaff extends Person implements Serializable {
     private void logLoanInterestChange(Loan loan, double newLoanInterestRateInPercent) {
         ChangeLog.getInstance().addItemToChangeLog(ChangeLogItemRegistrator.getLoanInterestRateChangeLogItem(this, loan, newLoanInterestRateInPercent));
     }
+
+    @Override
+    public String toString() {
+        return "BankStaff{" +
+                "employmentID=" + employmentID +
+                "} " + super.toString();
+    }
 }
