@@ -13,17 +13,15 @@ public class VideoTapeTimer {
     public VideoTapeTimer(int videoTapeLengthInMinutes,
                           int videoTapeCurrentUsedLengthInMinutes,
                           String inputTimeTVProgramStart,
-                          String inputTimeTVProgramEnd) {
+                          String inputTimeTVProgramEnd) throws DateTimeParseException {
 
         this.videoTapeLengthInMinutes = videoTapeLengthInMinutes;
         this.videoTapeCurrentUsedLengthInMinutes = videoTapeCurrentUsedLengthInMinutes;
 
-        try {
-            this.timeStart = LocalTime.parse(inputTimeTVProgramStart);
-            this.timeEnd = LocalTime.parse(inputTimeTVProgramEnd);
-        } catch (DateTimeParseException e) {
-            System.out.println("Incorrect time format, please input in digital format HH:MM");
-        }
+
+        this.timeStart = LocalTime.parse(inputTimeTVProgramStart);
+        this.timeEnd = LocalTime.parse(inputTimeTVProgramEnd);
+
     }
 
 
