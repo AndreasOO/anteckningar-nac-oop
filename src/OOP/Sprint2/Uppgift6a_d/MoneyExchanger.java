@@ -10,10 +10,16 @@ public class MoneyExchanger {
     private double totalChange;
     private double currentChangeLeft;
     Scanner scanner;
+    boolean isTestMode;
 
     private final ValuesCounter valuesCounter;
 
     public MoneyExchanger() {
+        valuesCounter = new ValuesCounter();
+        scanner = new Scanner(System.in);
+    }
+
+    public MoneyExchanger(boolean isTestMode) {
         valuesCounter = new ValuesCounter();
         scanner = new Scanner(System.in);
     }
@@ -34,6 +40,7 @@ public class MoneyExchanger {
     }
 
     public void getUserInput() {
+
         System.out.println("Input price");
         inputPrice = scanner.nextLine();
         System.out.println("Input amount paid");

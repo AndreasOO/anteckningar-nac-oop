@@ -3,7 +3,7 @@ package OOP.Sprint2.Uppgift14.ChangeLog;
 import OOP.Sprint2.Uppgift14.AccountAndLoanCreation.Loan;
 import OOP.Sprint2.Uppgift14.PersonsCreation.BankStaff;
 
-public class LoanApprovalChangeLogItem extends ChangeLogItem {
+public class LoanApprovalChangeLogItem extends ChangeLogItem implements JListHeadingFormatable {
     private final int employmentNumberOfBankStaffResponsibleForChange;
     private final int loanIDOfApprovedLoan;
     private final double approvedInterestRateInPercent;
@@ -16,6 +16,10 @@ public class LoanApprovalChangeLogItem extends ChangeLogItem {
         this.loanIDOfApprovedLoan = loan.getLoanID();
         this.approvedInterestRateInPercent = loan.getInterestRateInPercent();
         this.initialLoanPrincipal = loan.getInitialLoanPrincipal();
+    }
+
+    public String createHeader() {
+        return String.format("Log item %d \t-\t Loan approval", super.getChangeLogItemID());
     }
 
     public String getLogItemContent() {

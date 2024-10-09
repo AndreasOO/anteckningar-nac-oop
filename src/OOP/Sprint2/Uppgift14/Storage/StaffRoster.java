@@ -18,7 +18,7 @@ public class StaffRoster {
 
     private StaffRoster() {
         staff = new ArrayList<>();
-        staff.add(new BankStaff("Zion Anderson", 39000));
+        staff.add(new BankStaff("Lion Anderson", 39000));
         staff.add(new BankStaff("Liana Gonzales", 22000));
         staff.add(new BankStaff("Lucille Ruiz", 43000));
         staff.add(new BankStaff("Melody Adams", 55000));

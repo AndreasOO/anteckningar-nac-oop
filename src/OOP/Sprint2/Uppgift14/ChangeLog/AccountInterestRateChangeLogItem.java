@@ -3,7 +3,7 @@ package OOP.Sprint2.Uppgift14.ChangeLog;
 import OOP.Sprint2.Uppgift14.AccountAndLoanCreation.Account;
 import OOP.Sprint2.Uppgift14.PersonsCreation.BankStaff;
 
-public class AccountInterestRateChangeLogItem extends ChangeLogItem {
+public class AccountInterestRateChangeLogItem extends ChangeLogItem implements JListHeadingFormatable {
     private final int employmentNumberOfBankStaffResponsibleForChange;
     private final int accountNumberOfChangedAccount;
     private final double previousInterestRateInPercent;
@@ -18,6 +18,9 @@ public class AccountInterestRateChangeLogItem extends ChangeLogItem {
         this.newInterestRateInPercent = newInterestRateInPercent;
     }
 
+    public String createHeader() {
+        return String.format("Log item %d \t-\t Interest Rate Change on Account", super.getChangeLogItemID());
+    }
 
     public String getLogItemContent() {
         return String.format("Change Log item: %s -- Interest Rate Change on Account\n" +

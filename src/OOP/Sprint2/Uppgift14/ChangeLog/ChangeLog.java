@@ -24,6 +24,17 @@ public class ChangeLog implements ChangeLogItemHandler {
         changeLogItems = new ArrayList<>();
     }
 
+
+    public String[] createHeadersForJList() {
+        List<String> list = new ArrayList<>();
+        for (ChangeLogItem changeLogItem : changeLogItems) {
+            if (changeLogItem instanceof JListHeadingFormatable formatableItem) {
+                list.add(formatableItem.createHeader());
+            }
+        }
+        return list.toArray(new String[list.size()]);
+    }
+
     @Override
     public void addItemToChangeLog(ChangeLogItem changeLogItem) {
             changeLogItems.add(changeLogItem);
@@ -80,6 +91,10 @@ public class ChangeLog implements ChangeLogItemHandler {
     }
 
     //TODO add print methods for specific changeLogItem classes, a filter on instanceof
+
+
+
+
 
 
 }

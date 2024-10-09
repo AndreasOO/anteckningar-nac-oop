@@ -1,6 +1,7 @@
 package OOP.Sprint2.Uppgift6a_d;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,6 +27,8 @@ class MoneyExchangerTest {
         assertThrows(IllegalArgumentException.class, () -> {
             moneyExchanger.validateUserInput();
         });
+
+
     }
 
 
