@@ -14,6 +14,7 @@ public class BankStaffGUI {
     private final JPanel changeLogPanel;
     private final JPanel mainPanel;
     private JScrollPane mainPanelScrollPane;
+    private JPanel jp;
 
     private final JButton toolBtnAddCustomer;
     private final JButton toolBtnOpenAccount;
@@ -82,6 +83,7 @@ public class BankStaffGUI {
         setupLoginPanel();
         setupChangeLogPanel();
         setupMainPanel();
+        addEventListeners();
         loadData();
         showGUI();
     }
@@ -137,18 +139,42 @@ public class BankStaffGUI {
     private void setupMainPanel() {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setSize(1000, 1000);
-        JPanel jp = new JPanel();
+        jp = new JPanel();
         jp.setLayout(new BoxLayout(jp, BoxLayout.Y_AXIS));
         jp.setSize(new Dimension(1000, 500));
+
+//        for (int i = 0 ; i < 100; i++) {
+//            jp.add(new JLabel("Test"));
+//        }
+
         mainPanelScrollPane = new JScrollPane(jp);
         mainPanel.add(mainPanelScrollPane);
-
         frame.add(mainPanel, BorderLayout.CENTER);
+    }
 
+    private void showLogItemInMainPanel(String logItemHeader) {
+
+        int logItemID = Integer.parseInt(logItemHeader.split(" ")[2]);
+        String logItemContent = ChangeLog.getInstance().getLogItemContentByID(logItemID);
+        String[] strArr = logItemContent.split("\n");
+        JLabel label;
+        for (String str : strArr) {
+            label = new JLabel(str);
+            label.setFont(new Font("Arial", Font.BOLD, 20));
+            jp.add(label);
+        }
     }
 
     private void loadData() {
         changeLogItemList.setListData(ChangeLog.getInstance().createHeadersForJList());
+    }
+
+    private void addEventListeners() {
+        changeLogBtnShowDetails.addActionListener(e -> {
+            if (e.getSource() == changeLogBtnShowDetails) {
+                showLogItemInMainPanel(changeLogItemList.getSelectedValue().toString());
+            }
+        });
     }
 
     private void showGUI() {

@@ -45,6 +45,15 @@ public class ChangeLog implements ChangeLogItemHandler {
         System.out.println(changeLogItem.getLogItemContent());
     }
 
+    public String getLogItemContentByID(int id) {
+        for (ChangeLogItem changeLogItem : changeLogItems) {
+            if (changeLogItem.getChangeLogItemID() == id) {
+                return changeLogItem.getLogItemContent();
+            }
+        } return null;
+    }
+
+
     // TODO fix sorting with comparator class and date comparison of the time of change variable.
     @Override
     public void printChronologicalChangeHistory() {
