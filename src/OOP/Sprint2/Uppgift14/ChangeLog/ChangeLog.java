@@ -35,6 +35,19 @@ public class ChangeLog implements ChangeLogItemHandler {
         return list.toArray(new String[list.size()]);
     }
 
+    public String[] createHeadersForJListFilterByEmployeeID(int id) {
+        List<String> list = new ArrayList<>();
+        for (ChangeLogItem changeLogItem : changeLogItems) {
+            if (changeLogItem.getResponsibleEmployeeID() != id) {
+                continue;
+            }
+            if (changeLogItem instanceof JListHeadingFormatable formatableItem) {
+                list.add(formatableItem.createHeader());
+            }
+        }
+        return list.toArray(new String[list.size()]);
+    }
+
     @Override
     public void addItemToChangeLog(ChangeLogItem changeLogItem) {
             changeLogItems.add(changeLogItem);
@@ -52,6 +65,8 @@ public class ChangeLog implements ChangeLogItemHandler {
             }
         } return null;
     }
+
+
 
 
     // TODO fix sorting with comparator class and date comparison of the time of change variable.

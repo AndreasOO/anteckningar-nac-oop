@@ -5,6 +5,7 @@ import OOP.Sprint2.Uppgift14.PersonsCreation.BankStaff;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 public class BankStaffGUI {
     private final BankStaff bankStaffUser;
@@ -143,26 +144,10 @@ public class BankStaffGUI {
         jp.setLayout(new BoxLayout(jp, BoxLayout.Y_AXIS));
         jp.setSize(new Dimension(1000, 500));
 
-//        for (int i = 0 ; i < 100; i++) {
-//            jp.add(new JLabel("Test"));
-//        }
 
         mainPanelScrollPane = new JScrollPane(jp);
         mainPanel.add(mainPanelScrollPane);
         frame.add(mainPanel, BorderLayout.CENTER);
-    }
-
-    private void showLogItemInMainPanel(String logItemHeader) {
-
-        int logItemID = Integer.parseInt(logItemHeader.split(" ")[2]);
-        String logItemContent = ChangeLog.getInstance().getLogItemContentByID(logItemID);
-        String[] strArr = logItemContent.split("\n");
-        JLabel label;
-        for (String str : strArr) {
-            label = new JLabel(str);
-            label.setFont(new Font("Arial", Font.BOLD, 20));
-            jp.add(label);
-        }
     }
 
     private void loadData() {
@@ -175,6 +160,43 @@ public class BankStaffGUI {
                 showLogItemInMainPanel(changeLogItemList.getSelectedValue().toString());
             }
         });
+
+        changeLogBtnFilterShowMine.addActionListener(e -> {
+            if (e.getSource() == changeLogBtnFilterShowMine) {
+                filterLogItemsOnlyMine();
+            }
+        });
+        changeLogBtnFilterShowAll.addActionListener(e -> {
+            if (e.getSource() == changeLogBtnFilterShowAll) {
+                filterLogItemsShowAll();
+            }
+        });
+    }
+
+    private void showLogItemInMainPanel(String logItemHeader) {
+        int logItemID = Integer.parseInt(logItemHeader.split(" ")[2]);
+        String logItemContent = ChangeLog.getInstance().getLogItemContentByID(logItemID);
+        String[] strArr = logItemContent.split("\n");
+
+        for (Component comp : jp.getComponents()) {
+            comp.setVisible(false);
+        }
+
+        JLabel label;
+        for (String str : strArr) {
+            label = new JLabel(str);
+            label.setFont(new Font("Arial", Font.BOLD, 20));
+            jp.add(label);
+        }
+        jp.validate();
+    }
+
+    private void filterLogItemsOnlyMine() {
+        changeLogItemList.setListData(ChangeLog.getInstance().createHeadersForJListFilterByEmployeeID(this.bankStaffUser.getEmploymentID()));
+    }
+
+    private void filterLogItemsShowAll() {
+        changeLogItemList.setListData(ChangeLog.getInstance().createHeadersForJList());
     }
 
     private void showGUI() {

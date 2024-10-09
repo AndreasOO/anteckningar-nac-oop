@@ -23,6 +23,11 @@ public class Main {
         BankStaff staff1 = staffList.getFirst();
         BankAdministration bankAdmin = new BankAdministration(staff1);
 
+        BankStaff staff2 = staffList.getLast();
+        BankAdministration bankAdmin2 = new BankAdministration(staff2);
+
+
+
 
 
         bankAdmin.handleAccountCreation(10000, 5, customer1);
@@ -31,6 +36,13 @@ public class Main {
         bankAdmin.handleLoanApproval(50000, 7.5, customer1);
         Loan loan = customer1.getLoansList().getFirst();
         bankAdmin.handleLoanInterestChange(5, loan);
+
+        bankAdmin2.handleAccountCreation(10000, 5, customer1);
+        Account account2 = customer1.getAccountsList().getLast();
+        bankAdmin2.handleAccountInterestChange(12, account2);
+        bankAdmin2.handleLoanApproval(50000, 7.5, customer1);
+        Loan loan2 = customer1.getLoansList().getFirst();
+        bankAdmin2.handleLoanInterestChange(5, loan2);
 
         ChangeLog.getInstance().printChronologicalChangeHistory();
 
