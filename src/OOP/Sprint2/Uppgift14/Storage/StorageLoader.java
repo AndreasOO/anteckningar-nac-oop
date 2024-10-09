@@ -30,7 +30,7 @@ public class StorageLoader {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (EOFException e) {
-            System.out.println("Hit end of File");
+            System.out.println("Hit end of File bankstaff.ser");
         } catch (IOException e) {
          e.printStackTrace();
         }
@@ -45,7 +45,7 @@ public class StorageLoader {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (EOFException e) {
-            System.out.println("Hit end of File");
+            System.out.println("Hit end of File bankcustomers.ser");
         } catch (IOException e) {
             e.printStackTrace();
         }
