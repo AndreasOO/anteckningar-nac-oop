@@ -10,7 +10,6 @@ public class MoneyExchanger {
     private double totalChange;
     private double currentChangeLeft;
     Scanner scanner;
-    boolean isTestMode;
 
     private final ValuesCounter valuesCounter;
 
@@ -19,10 +18,6 @@ public class MoneyExchanger {
         scanner = new Scanner(System.in);
     }
 
-    public MoneyExchanger(boolean isTestMode) {
-        valuesCounter = new ValuesCounter();
-        scanner = new Scanner(System.in);
-    }
 
     public void runProgram() {
         getUserInput();
@@ -78,54 +73,65 @@ public class MoneyExchanger {
     public void calculateChangeBack() {
         currentChangeLeft = totalChange;
 
-        while (currentChangeLeft > 0) {
+
+            int timesDenomination;
+
             if (currentChangeLeft >= 500) {
-                valuesCounter.addFiveHundred();
-                currentChangeLeft -= 500;
-                continue;
+                timesDenomination = (int) currentChangeLeft/500;
+                valuesCounter.addFiveHundred(timesDenomination);
+                currentChangeLeft -= 500*timesDenomination;
+
             }
             if (currentChangeLeft >= 200) {
-                valuesCounter.addTwoHundred();
-                currentChangeLeft -= 200;
-                continue;
+                timesDenomination = (int) currentChangeLeft/200;
+                valuesCounter.addTwoHundred(timesDenomination);
+                currentChangeLeft -= 200*timesDenomination;
+
             }
             if (currentChangeLeft >= 100) {
-                valuesCounter.addOneHundred();
-                currentChangeLeft -= 100;
-                continue;
+                timesDenomination = (int) currentChangeLeft/100;
+                valuesCounter.addOneHundred(timesDenomination);
+                currentChangeLeft -= 100*timesDenomination;
+
             }
             if (currentChangeLeft >= 50) {
-                valuesCounter.addFifty();
-                currentChangeLeft -= 50;
-                continue;
+                timesDenomination = (int) currentChangeLeft/50;
+                valuesCounter.addFifty(timesDenomination);
+                currentChangeLeft -= 50*timesDenomination;
+
             }
             if (currentChangeLeft >= 20) {
-                valuesCounter.addTwenty();
-                currentChangeLeft -= 20;
-                continue;
+                timesDenomination = (int) currentChangeLeft/20;
+                valuesCounter.addTwenty(timesDenomination);
+                currentChangeLeft -= 20*timesDenomination;
+
             }
             if (currentChangeLeft >= 10) {
-                valuesCounter.addTen();
-                currentChangeLeft -= 10;
-                continue;
+                timesDenomination = (int) currentChangeLeft/10;
+                valuesCounter.addTen(timesDenomination);
+                currentChangeLeft -= 10*timesDenomination;
+
             }
 
             if (currentChangeLeft >= 5) {
-                valuesCounter.addFive();
-                currentChangeLeft -= 5;
-                continue;
+                timesDenomination = (int) currentChangeLeft/5;
+                valuesCounter.addFive(timesDenomination);
+                currentChangeLeft -= 5*timesDenomination;
+
             }
             if (currentChangeLeft >= 2) {
-                valuesCounter.addTwo();
-                currentChangeLeft -= 2;
-                continue;
+                timesDenomination = (int) currentChangeLeft/2;
+                valuesCounter.addTwo(timesDenomination);
+                currentChangeLeft -= 2*timesDenomination;
+
             }
             if (currentChangeLeft >= 1) {
-                valuesCounter.addSingle();
+                timesDenomination = (int) currentChangeLeft/1;
+                valuesCounter.addSingle(timesDenomination);
                 currentChangeLeft -= 1;
-                break;
+
             }
-        }
+
     }
 
     public void calculateTotalChange() {

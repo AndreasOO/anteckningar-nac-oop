@@ -171,6 +171,20 @@ public class BankStaffGUI {
                 filterLogItemsShowAll();
             }
         });
+
+        changeLogItemTypeSelector.addActionListener(e -> {
+            if (e.getSource() == changeLogItemTypeSelector) {
+                filterLogItemsByType(changeLogItemTypeSelector.getSelectedItem());
+            }
+        });
+
+
+    }
+
+    private void filterLogItemsByType(Object type) {
+        if (type instanceof String) {
+
+        }
     }
 
     private void showLogItemInMainPanel(String logItemHeader) {
