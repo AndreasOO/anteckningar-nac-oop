@@ -48,6 +48,124 @@ public class ChangeLog implements ChangeLogItemHandler {
         return list.toArray(new String[list.size()]);
     }
 
+    public String[] createHeadersForJListFilterByLoanApproval() {
+        List<String> list = new ArrayList<>();
+        for (ChangeLogItem changeLogItem : changeLogItems) {
+            if (!(changeLogItem instanceof LoanApprovalChangeLogItem)) {
+                continue;
+            }
+            if (changeLogItem instanceof JListHeadingFormatable formatableItem) {
+                list.add(formatableItem.createHeader());
+            }
+        }
+        return list.toArray(new String[list.size()]);
+    }
+
+    public String[] createHeadersForJListFilterByCreatedAccounts() {
+        List<String> list = new ArrayList<>();
+        for (ChangeLogItem changeLogItem : changeLogItems) {
+            if (!(changeLogItem instanceof AccountCreationChangeLogItem)) {
+                continue;
+            }
+            if (changeLogItem instanceof JListHeadingFormatable formatableItem) {
+                list.add(formatableItem.createHeader());
+            }
+        }
+        return list.toArray(new String[list.size()]);
+    }
+
+    public String[] createHeadersForJListFilterByLoanInterestChange() {
+        List<String> list = new ArrayList<>();
+        for (ChangeLogItem changeLogItem : changeLogItems) {
+            if (!(changeLogItem instanceof LoanInterestRateChangeLogItem)) {
+                continue;
+            }
+            if (changeLogItem instanceof JListHeadingFormatable formatableItem) {
+                list.add(formatableItem.createHeader());
+            }
+        }
+        return list.toArray(new String[list.size()]);
+    }
+
+    public String[] createHeadersForJListFilterByAccountInterestChange() {
+        List<String> list = new ArrayList<>();
+        for (ChangeLogItem changeLogItem : changeLogItems) {
+            if (!(changeLogItem instanceof AccountInterestRateChangeLogItem)) {
+                continue;
+            }
+            if (changeLogItem instanceof JListHeadingFormatable formatableItem) {
+                list.add(formatableItem.createHeader());
+            }
+        }
+        return list.toArray(new String[list.size()]);
+    }
+
+
+    // BY ID
+    public String[] createHeadersForJListFilterByLoanApprovalAndEmployeeID(int id) {
+        List<String> list = new ArrayList<>();
+        for (ChangeLogItem changeLogItem : changeLogItems) {
+            if (changeLogItem.getResponsibleEmployeeID() != id) {
+                continue;
+            }
+            if (!(changeLogItem instanceof LoanApprovalChangeLogItem)) {
+                continue;
+            }
+            if (changeLogItem instanceof JListHeadingFormatable formatableItem) {
+                list.add(formatableItem.createHeader());
+            }
+        }
+        return list.toArray(new String[list.size()]);
+    }
+
+    public String[] createHeadersForJListFilterByCreatedAccountsAndEmployeeID(int id) {
+        List<String> list = new ArrayList<>();
+        for (ChangeLogItem changeLogItem : changeLogItems) {
+            if (changeLogItem.getResponsibleEmployeeID() != id) {
+                continue;
+            }
+            if (!(changeLogItem instanceof AccountCreationChangeLogItem)) {
+                continue;
+            }
+            if (changeLogItem instanceof JListHeadingFormatable formatableItem) {
+                list.add(formatableItem.createHeader());
+            }
+        }
+        return list.toArray(new String[list.size()]);
+    }
+
+    public String[] createHeadersForJListFilterByLoanInterestChangeAndEmployeeID(int id) {
+        List<String> list = new ArrayList<>();
+        for (ChangeLogItem changeLogItem : changeLogItems) {
+            if (changeLogItem.getResponsibleEmployeeID() != id) {
+                continue;
+            }
+            if (!(changeLogItem instanceof LoanInterestRateChangeLogItem)) {
+                continue;
+            }
+            if (changeLogItem instanceof JListHeadingFormatable formatableItem) {
+                list.add(formatableItem.createHeader());
+            }
+        }
+        return list.toArray(new String[list.size()]);
+    }
+
+    public String[] createHeadersForJListFilterByAccountInterestChangeAndEmployeeID(int id) {
+        List<String> list = new ArrayList<>();
+        for (ChangeLogItem changeLogItem : changeLogItems) {
+            if (changeLogItem.getResponsibleEmployeeID() != id) {
+                continue;
+            }
+            if (!(changeLogItem instanceof AccountInterestRateChangeLogItem)) {
+                continue;
+            }
+            if (changeLogItem instanceof JListHeadingFormatable formatableItem) {
+                list.add(formatableItem.createHeader());
+            }
+        }
+        return list.toArray(new String[list.size()]);
+    }
+
     @Override
     public void addItemToChangeLog(ChangeLogItem changeLogItem) {
             changeLogItems.add(changeLogItem);

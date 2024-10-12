@@ -1,6 +1,7 @@
 package OOP.Sprint2.Uppgift14.GUI;
 
 import OOP.Sprint2.Uppgift14.ChangeLog.ChangeLog;
+import OOP.Sprint2.Uppgift14.ChangeLog.LoanApprovalChangeLogItem;
 import OOP.Sprint2.Uppgift14.PersonsCreation.BankStaff;
 
 import javax.swing.*;
@@ -9,13 +10,14 @@ import java.util.Arrays;
 
 public class BankStaffGUI {
     private final BankStaff bankStaffUser;
+    private boolean showAll = true;
     private final JFrame frame;
     private final JPanel toolPanel;
     private final JPanel loginPanel;
     private final JPanel changeLogPanel;
     private final JPanel mainPanel;
     private JScrollPane mainPanelScrollPane;
-    private JPanel jp;
+    private JPanel mainPanelContent;
 
     private final JButton toolBtnAddCustomer;
     private final JButton toolBtnOpenAccount;
@@ -44,7 +46,6 @@ public class BankStaffGUI {
 
     public BankStaffGUI(BankStaff bankStaffUser) {
         this.bankStaffUser = bankStaffUser;
-//        this.changeLog = ChangeLog.getInstance();
 
         frame = new JFrame("Bank System");
         frame.setLayout(new BorderLayout());
@@ -140,12 +141,12 @@ public class BankStaffGUI {
     private void setupMainPanel() {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setSize(1000, 1000);
-        jp = new JPanel();
-        jp.setLayout(new BoxLayout(jp, BoxLayout.Y_AXIS));
-        jp.setSize(new Dimension(1000, 500));
+        mainPanelContent = new JPanel();
+        mainPanelContent.setLayout(new BoxLayout(mainPanelContent, BoxLayout.Y_AXIS));
+        mainPanelContent.setSize(new Dimension(1000, 500));
 
 
-        mainPanelScrollPane = new JScrollPane(jp);
+        mainPanelScrollPane = new JScrollPane(mainPanelContent);
         mainPanel.add(mainPanelScrollPane);
         frame.add(mainPanel, BorderLayout.CENTER);
     }
@@ -156,19 +157,21 @@ public class BankStaffGUI {
 
     private void addEventListeners() {
         changeLogBtnShowDetails.addActionListener(e -> {
-            if (e.getSource() == changeLogBtnShowDetails) {
+            if (e.getSource() == changeLogBtnShowDetails && changeLogItemList.getSelectedValue() != null) {
                 showLogItemInMainPanel(changeLogItemList.getSelectedValue().toString());
             }
         });
 
         changeLogBtnFilterShowMine.addActionListener(e -> {
             if (e.getSource() == changeLogBtnFilterShowMine) {
-                filterLogItemsOnlyMine();
+                showAll = false;
+                filterLogItemsByType(changeLogItemTypeSelector.getSelectedItem());
             }
         });
         changeLogBtnFilterShowAll.addActionListener(e -> {
             if (e.getSource() == changeLogBtnFilterShowAll) {
-                filterLogItemsShowAll();
+                showAll = true;
+                filterLogItemsByType(changeLogItemTypeSelector.getSelectedItem());
             }
         });
 
@@ -181,18 +184,71 @@ public class BankStaffGUI {
 
     }
 
-    private void filterLogItemsByType(Object type) {
-        if (type instanceof String) {
+    private void filterLogItemsByType(Object selectedItem) {
+        if (selectedItem instanceof String itemType) {
+            switch (itemType) {
+                case "All changes" -> filterLogItemByAllTypes();
 
+                case "Approved Loans" -> filterLogItemByApprovedLoans();
+
+                case "Created Accounts" -> filterLogItemByCreatedAccounts();
+
+                case "Approved Loan Interest Change" -> filterLogItemByLoanInterestChange();
+
+                case "Approved Account Interest Change" -> filterLogItemByAccountInterestChange();
+
+            }
         }
     }
+
+    private void filterLogItemByAllTypes() {
+        if (showAll) {
+            changeLogItemList.setListData(ChangeLog.getInstance().createHeadersForJList());
+        } else {
+            changeLogItemList.setListData(ChangeLog.getInstance().createHeadersForJListFilterByEmployeeID(this.bankStaffUser.getEmploymentID()));
+        }
+    }
+
+    private void filterLogItemByApprovedLoans() {
+        if (showAll) {
+            changeLogItemList.setListData(ChangeLog.getInstance().createHeadersForJListFilterByLoanApproval());
+        } else {
+            changeLogItemList.setListData(ChangeLog.getInstance().createHeadersForJListFilterByLoanApprovalAndEmployeeID(this.bankStaffUser.getEmploymentID()));
+        }
+    }
+
+    private void filterLogItemByCreatedAccounts() {
+        if (showAll) {
+            changeLogItemList.setListData(ChangeLog.getInstance().createHeadersForJListFilterByCreatedAccounts());
+        } else {
+            changeLogItemList.setListData(ChangeLog.getInstance().createHeadersForJListFilterByCreatedAccountsAndEmployeeID(this.bankStaffUser.getEmploymentID()));
+        }
+    }
+
+    private void filterLogItemByLoanInterestChange() {
+        if (showAll) {
+            changeLogItemList.setListData(ChangeLog.getInstance().createHeadersForJListFilterByLoanInterestChange());
+        } else {
+            changeLogItemList.setListData(ChangeLog.getInstance().createHeadersForJListFilterByLoanInterestChangeAndEmployeeID(this.bankStaffUser.getEmploymentID()));
+        }
+    }
+
+    private void filterLogItemByAccountInterestChange() {
+        if (showAll) {
+            changeLogItemList.setListData(ChangeLog.getInstance().createHeadersForJListFilterByAccountInterestChange());
+        } else {
+            changeLogItemList.setListData(ChangeLog.getInstance().createHeadersForJListFilterByAccountInterestChangeAndEmployeeID(this.bankStaffUser.getEmploymentID()));
+        }
+    }
+
+
 
     private void showLogItemInMainPanel(String logItemHeader) {
         int logItemID = Integer.parseInt(logItemHeader.split(" ")[2]);
         String logItemContent = ChangeLog.getInstance().getLogItemContentByID(logItemID);
         String[] strArr = logItemContent.split("\n");
 
-        for (Component comp : jp.getComponents()) {
+        for (Component comp : mainPanelContent.getComponents()) {
             comp.setVisible(false);
         }
 
@@ -200,18 +256,11 @@ public class BankStaffGUI {
         for (String str : strArr) {
             label = new JLabel(str);
             label.setFont(new Font("Arial", Font.BOLD, 20));
-            jp.add(label);
+            mainPanelContent.add(label);
         }
-        jp.validate();
+        mainPanelContent.validate();
     }
 
-    private void filterLogItemsOnlyMine() {
-        changeLogItemList.setListData(ChangeLog.getInstance().createHeadersForJListFilterByEmployeeID(this.bankStaffUser.getEmploymentID()));
-    }
-
-    private void filterLogItemsShowAll() {
-        changeLogItemList.setListData(ChangeLog.getInstance().createHeadersForJList());
-    }
 
     private void showGUI() {
 

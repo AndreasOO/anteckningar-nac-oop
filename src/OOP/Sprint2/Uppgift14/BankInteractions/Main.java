@@ -17,7 +17,7 @@ public class Main {
 
 
 
-        ChangeLog.getInstance().createHeadersForJList();
+
 
         BankCustomer customer1 = customerList.getFirst();
         BankStaff staff1 = staffList.getFirst();

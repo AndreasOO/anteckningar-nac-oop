@@ -17,40 +17,40 @@ public class ValuesCounter {
     public ValuesCounter() {
 
     }
-    public void addSingle(int timeDenomination) {
-        this.numberOfSingles+=timeDenomination;
+    public void addSingle(int timesDenomination) {
+        this.numberOfSingles+=timesDenomination;
     }
 
-    public void addTwo(int timeDenomination) {
-        this.numberOfTwos+=timeDenomination;
+    public void addTwo(int timesDenomination) {
+        this.numberOfTwos+=timesDenomination;
     }
 
-    public void addFive(int timeDenomination) {
-        this.numberOfFives+=timeDenomination;
+    public void addFive(int timesDenomination) {
+        this.numberOfFives+=timesDenomination;
     }
 
-    public void addTen(int timeDenomination) {
-        this.numberOfTens+=timeDenomination;
+    public void addTen(int timesDenomination) {
+        this.numberOfTens+=timesDenomination;
     }
 
-    public void addTwenty(int timeDenomination) {
-        this.numberOfTwenties+=timeDenomination;
+    public void addTwenty(int timesDenomination) {
+        this.numberOfTwenties+=timesDenomination;
     }
 
-    public void addFifty(int timeDenomination) {
-        this.numberOfFifties+=timeDenomination;
+    public void addFifty(int timesDenomination) {
+        this.numberOfFifties+=timesDenomination;
     }
 
-    public void addOneHundred(int timeDenomination) {
-        this.numberOfHundreds+=timeDenomination;
+    public void addOneHundred(int timesDenomination) {
+        this.numberOfHundreds+=timesDenomination;
     }
 
-    public void addTwoHundred(int timeDenomination) {
-        this.numberOfTwoHundreds+=timeDenomination;
+    public void addTwoHundred(int timesDenomination) {
+        this.numberOfTwoHundreds+=timesDenomination;
     }
 
-    public void addFiveHundred(int timeDenomination) {
-        this.numberOfFiveHundreds+=timeDenomination;
+    public void addFiveHundred(int timesDenomination) {
+        this.numberOfFiveHundreds+=timesDenomination;
     }
 
 

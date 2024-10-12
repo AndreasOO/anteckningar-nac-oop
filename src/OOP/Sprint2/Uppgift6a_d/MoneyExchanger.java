@@ -126,8 +126,7 @@ public class MoneyExchanger {
 
             }
             if (currentChangeLeft >= 1) {
-                timesDenomination = (int) currentChangeLeft/1;
-                valuesCounter.addSingle(timesDenomination);
+                valuesCounter.addSingle(1);
                 currentChangeLeft -= 1;
 
             }
