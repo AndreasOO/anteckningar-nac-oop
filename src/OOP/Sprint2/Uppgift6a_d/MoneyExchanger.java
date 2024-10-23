@@ -16,6 +16,8 @@ public class MoneyExchanger {
     public MoneyExchanger() {
         valuesCounter = new ValuesCounter();
         scanner = new Scanner(System.in);
+        Integer v = 5;
+        v.hashCode();
     }
 
 
