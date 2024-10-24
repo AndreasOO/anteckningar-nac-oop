@@ -12,23 +12,19 @@ import java.util.List;
 
 
 public class TextEditor {
-    JFrame frame;
-
-    JPanel mainPanel;
-
-    JPanel toolbarPanel;
-    JLabel fileNameLabel;
-    JTextField fileNameTextField;
-    JButton openButton;
-    JButton saveButton;
-    JButton printButton;
-    JButton exitButton;
-
-    JPanel textAreaPanel;
-    JScrollPane scrollPane;
-    JTextArea textArea;
-
-    List<Path> availableFiles;
+    private final JFrame frame;
+    private final JPanel mainPanel;
+    private final JPanel toolbarPanel;
+    private final JLabel fileNameLabel;
+    private final JTextField fileNameTextField;
+    private final JButton openButton;
+    private final JButton saveButton;
+    private final JButton printButton;
+    private final JButton exitButton;
+    private final JPanel textAreaPanel;
+    private final JScrollPane scrollPane;
+    private final JTextArea textArea;
+    private final List<Path> availableFiles;
 
 
     TextEditor(){
