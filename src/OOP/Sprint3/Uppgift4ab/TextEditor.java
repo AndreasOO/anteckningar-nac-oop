@@ -9,7 +9,7 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 public class TextEditor {
     JFrame frame;
@@ -77,10 +77,14 @@ public class TextEditor {
 
     }
 
+
+
     private void addEventListeners() {
+
         fileNameTextField.addActionListener(e -> {
             textArea.setText(openFile(fileNameTextField.getText()));
         });
+
 
         openButton.addActionListener(e -> {
             if (e.getSource() == openButton) {
