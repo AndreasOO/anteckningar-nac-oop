@@ -35,7 +35,7 @@ public class RockPaperScissor{
     int humanWinsCounter;
     int computerWinsCounter;
 
-    GameReseter gameReseter;
+
 
 
     public RockPaperScissor() {
@@ -65,7 +65,7 @@ public class RockPaperScissor{
         scoreHumanTitleLabel = new JLabel("Human: 0");
         scoreComputerTitleLabel = new JLabel("Computer: 0");
 
-        gameReseter = new GameReseter(this);
+
 
 
     }
