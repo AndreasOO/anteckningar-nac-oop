@@ -10,14 +10,16 @@ public class Producer implements Runnable {
     private final String productString;
     private final int time;
     private final MyQueue queue;
+    private final int priority;
 
 
-    public Producer(String productString, int time, MyQueue queue) {
+    public Producer(String productString, int time, MyQueue queue, int priority) {
         this.producerID = PRODUCER_ID_INCREMENTOR++;
         this.productID = 1;
         this.productString = productString;
         this.time = time;
         this.queue = queue;
+        this.priority = priority;
 
     }
 
@@ -33,4 +35,7 @@ public class Producer implements Runnable {
         }
     }
 
+    public int getPriority() {
+        return priority;
+    }
 }
