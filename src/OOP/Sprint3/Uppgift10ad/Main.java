@@ -47,8 +47,8 @@ public class Main {
         threads.forEach(Thread::interrupt);
 
         consumer1.printConsumedProducts();
-//        consumer2.printConsumedProducts();
-//        consumer3.printConsumedProducts();
+        consumer2.printConsumedProducts();
+        consumer3.printConsumedProducts();
 
 
     }
