@@ -27,7 +27,7 @@ public class Producer implements Runnable {
     public void run() {
         while (!Thread.interrupted()) {
            try {
-               queue.put(String.format("Product: %s - Product ID: %d - Producer ID: %d", this.productString, this.productID++, this.producerID));
+               queue.put(String.format("Product: %s - Product ID: %d - Producer ID: %d - Priority: %d", this.productString, this.productID++, this.producerID, getPriority()));
                Thread.sleep(time);
            } catch (InterruptedException e) {
                System.out.println(String.format("Producer with ID %d interrupted", this.producerID));

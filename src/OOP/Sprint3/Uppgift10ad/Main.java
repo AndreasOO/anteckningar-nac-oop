@@ -9,9 +9,9 @@ public class Main {
 
         MyQueue myQueue = new MyQueue();
 
-        Producer producer1 = new Producer("Apple", 1000, myQueue, Thread.MIN_PRIORITY);
-        Producer producer2 = new Producer("Orange", 1000, myQueue, Thread.NORM_PRIORITY);
-        Producer producer3 = new Producer("Carrot", 1000, myQueue, Thread.MAX_PRIORITY);
+        Producer producer1 = new Producer("Apple", 100, myQueue, Thread.MIN_PRIORITY);
+        Producer producer2 = new Producer("Orange", 100, myQueue, Thread.NORM_PRIORITY);
+        Producer producer3 = new Producer("Carrot", 100, myQueue, Thread.MAX_PRIORITY);
 
         List<Thread> threads = new ArrayList<>();
         Consumer consumer1 = new Consumer(1000, myQueue);
@@ -25,6 +25,8 @@ public class Main {
         producerThread1.setPriority(producer1.getPriority());
         producerThread2.setPriority(producer2.getPriority());
         producerThread3.setPriority(producer3.getPriority());
+
+
 
         threads.add(new Thread(producer1));
         threads.add(new Thread(producer2));
@@ -45,8 +47,8 @@ public class Main {
         threads.forEach(Thread::interrupt);
 
         consumer1.printConsumedProducts();
-        consumer2.printConsumedProducts();
-        consumer3.printConsumedProducts();
+//        consumer2.printConsumedProducts();
+//        consumer3.printConsumedProducts();
 
 
     }
