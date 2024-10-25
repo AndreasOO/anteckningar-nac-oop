@@ -14,6 +14,7 @@ public class Producer implements Runnable {
 
     public Producer(String productString, int time, MyQueue queue) {
         this.producerID = PRODUCER_ID_INCREMENTOR++;
+        this.productID = 1;
         this.productString = productString;
         this.time = time;
         this.queue = queue;
@@ -22,13 +23,14 @@ public class Producer implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
-           queue.put(String.format("Product: %s - Product ID: %d - Producer ID: %d", this.productString, this.productID, this.producerID));
+        while (!Thread.interrupted()) {
            try {
-               wait(time);
+               queue.put(String.format("Product: %s - Product ID: %d - Producer ID: %d", this.productString, this.productID++, this.producerID));
+               Thread.sleep(time);
            } catch (InterruptedException e) {
-               e.printStackTrace();
+               System.out.println(String.format("Producer with ID %d interrupted", this.producerID));
            }
         }
     }
+
 }

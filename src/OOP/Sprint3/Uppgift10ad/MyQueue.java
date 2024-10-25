@@ -11,12 +11,12 @@ public class MyQueue {
         queue = new ArrayList<>();
     }
 
-    public void put(String o) {
+    synchronized void put(String o) {
         queue.add(o);
         notify();
     }
 
-    public String take() {
+    synchronized String take() {
         if (queue.isEmpty()) {
             try {
                 wait();
