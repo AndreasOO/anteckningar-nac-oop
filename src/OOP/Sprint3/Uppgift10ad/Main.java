@@ -9,9 +9,9 @@ public class Main {
 
         MyQueue myQueue = new MyQueue();
 
-        Producer producer1 = new Producer("Apple", 100, myQueue, Thread.MIN_PRIORITY);
-        Producer producer2 = new Producer("Orange", 100, myQueue, Thread.NORM_PRIORITY);
-        Producer producer3 = new Producer("Carrot", 100, myQueue, Thread.MAX_PRIORITY);
+        Producer producer1 = new Producer("Apple", 1000, myQueue, Thread.MIN_PRIORITY);
+        Producer producer2 = new Producer("Orange", 1000, myQueue, Thread.NORM_PRIORITY);
+        Producer producer3 = new Producer("Carrot", 1000, myQueue, Thread.MAX_PRIORITY);
 
         List<Thread> threads = new ArrayList<>();
         Consumer consumer1 = new Consumer(1000, myQueue);

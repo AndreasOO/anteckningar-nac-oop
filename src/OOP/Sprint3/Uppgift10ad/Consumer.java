@@ -28,6 +28,7 @@ public class Consumer implements Runnable {
                 Thread.sleep(time);
             } catch (InterruptedException e) {
                 System.out.println(String.format("Consumer with ID %d interrupted", this.consumerID));
+                break;
             }
         }
     }

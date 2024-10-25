@@ -31,6 +31,7 @@ public class Producer implements Runnable {
                Thread.sleep(time);
            } catch (InterruptedException e) {
                System.out.println(String.format("Producer with ID %d interrupted", this.producerID));
+               break;
            }
         }
     }
