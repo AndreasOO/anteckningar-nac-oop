@@ -4,6 +4,7 @@ import java.util.Timer;
 
 public class Producer implements Runnable {
     private static int PRODUCER_ID_INCREMENTOR = 1;
+    private static int PRODUCT_ID_INCREMENTOR = 1;
 
     private final int producerID;
     private int productID;
@@ -15,7 +16,7 @@ public class Producer implements Runnable {
 
     public Producer(String productString, int time, MyQueue queue, int priority) {
         this.producerID = PRODUCER_ID_INCREMENTOR++;
-        this.productID = 1;
+
         this.productString = productString;
         this.time = time;
         this.queue = queue;
@@ -25,8 +26,11 @@ public class Producer implements Runnable {
 
     @Override
     public void run() {
+        System.out.println("Producer " + productString + " started");
         while (!Thread.interrupted()) {
            try {
+               //increment product ID here to make use of thread priority - not in constructor
+               this.productID = PRODUCT_ID_INCREMENTOR++;
                queue.put(String.format("Product: %s - Product ID: %d - Producer ID: %d - Priority: %d", this.productString, this.productID++, this.producerID, getPriority()));
                Thread.sleep(time);
            } catch (InterruptedException e) {

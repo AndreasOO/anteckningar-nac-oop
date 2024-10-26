@@ -12,16 +12,18 @@ public class MyQueue {
     }
 
     synchronized void put(String o) {
+
         queue.add(o);
         notify();
     }
 
     synchronized String take() {
-        if (queue.isEmpty()) {
+        while (queue.isEmpty()) {
             try {
                 wait();
             } catch (InterruptedException e) {
                 System.out.println(e.getMessage());
+                return null;
             }
         }
         return queue.removeFirst();

@@ -15,8 +15,8 @@ public class Main {
 
         List<Thread> threads = new ArrayList<>();
         Consumer consumer1 = new Consumer(1000, myQueue);
-        Consumer consumer2 = new Consumer(1500, myQueue);
-        Consumer consumer3 = new Consumer(1800, myQueue);
+        Consumer consumer2 = new Consumer(1000, myQueue);
+        Consumer consumer3 = new Consumer(1000, myQueue);
 
         Thread producerThread1 = new Thread(producer1);
         Thread producerThread2 = new Thread(producer2);
@@ -28,9 +28,9 @@ public class Main {
 
 
 
-        threads.add(new Thread(producer1));
-        threads.add(new Thread(producer2));
-        threads.add(new Thread(producer3));
+        threads.add(producerThread3);
+        threads.add(producerThread2);
+        threads.add(producerThread1);
         threads.add(new Thread(consumer1));
         threads.add(new Thread(consumer2));
         threads.add(new Thread(consumer3));
