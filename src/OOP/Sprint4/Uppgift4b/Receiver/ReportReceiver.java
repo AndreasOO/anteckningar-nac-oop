@@ -2,6 +2,7 @@ package OOP.Sprint4.Uppgift4b.Receiver;
 
 import javax.swing.*;
 import java.net.*;
+import java.util.Enumeration;
 
 public class ReportReceiver implements Runnable{
     InetAddress ip;
@@ -19,8 +20,10 @@ public class ReportReceiver implements Runnable{
         address = new InetSocketAddress(ip, port);
         packet = new DatagramPacket(new byte[1024], 1024);
         socket = new MulticastSocket(this.port);
-        networkInterface = NetworkInterface.getByInetAddress(ip);
+        networkInterface = NetworkInterface.getByName("wlp0s20f3");
+        System.out.println(networkInterface.getName());
         socket.joinGroup(address,networkInterface);
+        System.out.println(socket.getNetworkInterface().getName());
         gui = new GUIReceiver();
     }
 
@@ -28,6 +31,7 @@ public class ReportReceiver implements Runnable{
         gui.init();
         startReceive();
     }
+
 
     public void startReceive() throws Exception {
         while (true) {
