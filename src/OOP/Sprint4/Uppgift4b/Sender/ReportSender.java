@@ -1,22 +1,23 @@
-package OOP.Sprint4.Uppgift4a_b.Sender;
+package OOP.Sprint4.Uppgift4b.Sender;
 
 import javax.swing.*;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.MulticastSocket;
 
 public class ReportSender implements Runnable {
     InetAddress ip;
     int port;
-    DatagramSocket socket;
+    MulticastSocket socket;
     DatagramPacket packet;
     String payload;
     GUISender gui;
 
     public ReportSender(int port) throws Exception {
-        this.ip = InetAddress.getLocalHost();
+        this.ip = InetAddress.getByName("234.234.234.234");
         this.port = port;
-        this.socket = new DatagramSocket();
+        this.socket = new MulticastSocket(port);
     }
 
     public void startProgram() {

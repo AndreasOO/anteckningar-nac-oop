@@ -1,6 +1,4 @@
-package OOP.Sprint4.Uppgift4a_b.Receiver;
-
-import javax.swing.*;
+package OOP.Sprint4.Uppgift4a.Receiver;
 
 public class Main {
     public static void main(String[] args) {

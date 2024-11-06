@@ -1,4 +1,4 @@
-package OOP.Sprint4.Uppgift4a_b.Sender;
+package OOP.Sprint4.Uppgift4a.Sender;
 
 import javax.swing.*;
 

@@ -1,4 +1,4 @@
-package OOP.Sprint4.Uppgift4a_b.Receiver;
+package OOP.Sprint4.Uppgift4a.Receiver;
 
 import javax.swing.*;
 import java.net.DatagramPacket;
