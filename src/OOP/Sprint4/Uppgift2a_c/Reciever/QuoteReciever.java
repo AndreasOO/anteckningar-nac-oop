@@ -23,11 +23,17 @@ public class QuoteReciever {
             socket.receive(packet);
             message = new String(packet.getData(), 0, packet.getLength());
             System.out.println("Received message: " + message);
-            message = "Received message: " + message;
-            new DatagramSocket().send(new DatagramPacket(message.getBytes(), message.length(), this.ip, 4443));
+            sendReceipt(message);
         }
 
 
 
+    }
+
+
+
+    private void sendReceipt(String message) throws IOException {
+        message = "Receipt of message: " + message;
+        new DatagramSocket().send(new DatagramPacket(message.getBytes(), message.length(), this.ip, 4443));
     }
 }
