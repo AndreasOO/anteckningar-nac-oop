@@ -1,6 +1,5 @@
 package OOP.Sprint4.Uppgift5a_b.Client;
 
-import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,7 +7,7 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.GregorianCalendar;
+
 
 public class Client implements Runnable {
     InetAddress ip;
@@ -30,18 +29,12 @@ public class Client implements Runnable {
              BufferedReader in = new BufferedReader(new InputStreamReader(socketToServer.getInputStream()));
              BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in))) {
 
-            System.out.println("Made it here");
 
-            String connectionResult = in.readLine();
-            System.out.println(connectionResult);
+            System.out.println(in.readLine());
 
-            String name = userInput.readLine();
+            out.println(userInput.readLine());
 
-            out.println(name);
-
-            String result = in.readLine();
-
-            System.out.println(result);
+            System.out.println(in.readLine());
 
 
         } catch (IOException e) {

@@ -46,16 +46,12 @@ public class Server implements Runnable {
             }
             System.out.println("Client connected");
             new Thread(() -> {
-                System.out.println("made it here in server");
                 try (PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                      BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))) {
 
                     out.println("Connection established - Please enter contact name:");
 
-
                     String name = in.readLine();
-
-                    System.out.println("Recieved input: " + name);
 
                     String result = contactDAO.findContact(name);
 
@@ -65,7 +61,6 @@ public class Server implements Runnable {
                     e.printStackTrace();
                 }
             }).start();
-            System.out.println("Test2");
         }
 
     }
