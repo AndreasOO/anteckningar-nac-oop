@@ -11,7 +11,8 @@ import java.net.UnknownHostException;
 public class Server implements Runnable {
     InetAddress ip;
     int port;
-    ServerSocket socket2;
+    ServerSocket serverSocket;
+    Socket clientSocket;
 
 
     public Server(int port) {
@@ -24,28 +25,35 @@ public class Server implements Runnable {
     }
 
     public void startServer() {
-            try (ServerSocket serverSocket = new ServerSocket(port)) {
-                System.out.println("Server started");
-                while (true) {
-                    try (Socket socketToClient = serverSocket.accept();
-                         BufferedReader reader = new BufferedReader(new InputStreamReader(socketToClient.getInputStream()))) {
 
-                        System.out.println("Established connection with client: " + socketToClient.getInetAddress());
-                        String inputLine;
-                        if ((inputLine = reader.readLine()) != null) {
-                            System.out.println("Server received message: " + inputLine + " - from ip: " + socketToClient.getInetAddress());
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+        try {
+            serverSocket = new ServerSocket(port);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Server started");
 
+        while (true) {
+            try {
+                clientSocket = serverSocket.accept();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            System.out.println("Established connection with client: " + clientSocket.getInetAddress());
+            new Thread(() -> {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))) {
 
+                        String inputLine;
+                        if ((inputLine = reader.readLine()) != null) {
+                            System.out.println("Server received message: " + inputLine + " - from ip: " + clientSocket.getInetAddress());
+                        }
 
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }).start();
         }
+    }
 
 
 
