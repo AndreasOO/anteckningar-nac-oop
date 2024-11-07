@@ -7,17 +7,17 @@ import java.net.InetAddress;
 import java.net.MulticastSocket;
 
 public class ReportSender implements Runnable {
-    InetAddress ip;
-    int port;
-    MulticastSocket socket;
-    DatagramPacket packet;
-    String payload;
-    GUISender gui;
+    private final InetAddress ip;
+    private final int port;
+    private final MulticastSocket socket;
+    private String payload;
+    private GUISender gui;
 
     public ReportSender(int port) throws Exception {
         this.ip = InetAddress.getByName("234.234.234.234");
         this.port = port;
         this.socket = new MulticastSocket(port);
+
     }
 
     public void startProgram() {
@@ -30,8 +30,9 @@ public class ReportSender implements Runnable {
         if (title == null) {
             System.exit(0);
         }
-        gui = new GUISender(title);
+
         gui.init();
+        gui = new GUISender(title);
 
     }
 
