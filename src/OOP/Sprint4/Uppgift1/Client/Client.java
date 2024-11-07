@@ -25,10 +25,16 @@ public class Client implements Runnable {
     public void connectToServer() {
         while (true) {
             try (Socket socket = new Socket(ip, port);
-                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
+                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 
-                System.out.println("sending testing");
+                System.out.println(clientName + " sending message");
                 out.println("Client: " + clientName + " testing");
+
+                String response = null;
+                if ((response = in.readLine()) != null) {
+                    System.out.println(clientName + "received response: " + response);
+                }
                 Thread.sleep(3000);
 
             } catch (IOException e) {

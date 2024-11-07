@@ -1,4 +1,4 @@
-package OOP.Sprint4.Uppgift1.Server;
+package OOP.Sprint4.Uppgift5a_b.Server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,9 +12,9 @@ import java.net.UnknownHostException;
 public class Server implements Runnable {
     InetAddress ip;
     int port;
-    ServerSocket serverSocket;
     Socket clientSocket;
-
+    ServerSocket serverSocket;
+    ContactDAO contactDAO;
 
     public Server(int port) {
         this.port = port;
@@ -23,42 +23,52 @@ public class Server implements Runnable {
         } catch (UnknownHostException e) {
             ip = InetAddress.getLoopbackAddress();
         }
+
+        contactDAO = new ContactDAO();
     }
 
     public void startServer() {
-
         try {
             serverSocket = new ServerSocket(port);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         System.out.println("Server started");
 
         while (true) {
+
             try {
                 clientSocket = serverSocket.accept();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("Established connection with client: " + clientSocket.getInetAddress());
+            System.out.println("Client connected");
             new Thread(() -> {
+                System.out.println("made it here in server");
                 try (PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-                     BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))) {
+                     BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))) {
 
-                        String inputLine;
-                        if ((inputLine = reader.readLine()) != null) {
-                            System.out.println("Server received message: " + inputLine + " - from ip: " + clientSocket.getInetAddress());
-                            out.println("Response 200: received message");
-                        }
+                    out.println("Connection established - Please enter contact name:");
+
+                    String name = in.readLine();
+                    if (name == null) {
+                        Thread.currentThread().interrupt();
+                    }
+
+                    String result = contactDAO.findContact(name);
+
+                    out.println(result);
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }).start();
+            System.out.println("Test2");
         }
+
     }
-
-
 
     public void run() {
         startServer();
