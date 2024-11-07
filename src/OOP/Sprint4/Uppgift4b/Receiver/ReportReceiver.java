@@ -5,14 +5,14 @@ import java.net.*;
 import java.util.Enumeration;
 
 public class ReportReceiver implements Runnable{
-    InetAddress ip;
-    InetSocketAddress address;
-    int port;
-    MulticastSocket socket;
-    DatagramPacket packet;
-    String report;
-    GUIReceiver gui;
-    NetworkInterface networkInterface;
+    private final InetAddress ip;
+    private final InetSocketAddress address;
+    private final int port;
+    private final MulticastSocket socket;
+    private final DatagramPacket packet;
+    private final StringBuilder report;
+    private final GUIReceiver gui;
+    private final NetworkInterface networkInterface;
 
     public ReportReceiver(int port) throws Exception {
         this.port = port;
@@ -24,6 +24,7 @@ public class ReportReceiver implements Runnable{
         System.out.println(networkInterface.getName());
         socket.joinGroup(address,networkInterface);
         System.out.println(socket.getNetworkInterface().getName());
+        report = new StringBuilder();
         gui = new GUIReceiver();
     }
 
@@ -36,8 +37,8 @@ public class ReportReceiver implements Runnable{
     public void startReceive() throws Exception {
         while (true) {
             socket.receive(packet);
-            report = new String(packet.getData(), 0, packet.getLength());
-            gui.getPanel().add(new JLabel(report));
+            report.append(new String(packet.getData(), 0, packet.getLength()));
+            gui.getPanel().add(new JLabel(report.toString()));
             gui.getFrame().repaint();
             gui.getFrame().revalidate();
         }
