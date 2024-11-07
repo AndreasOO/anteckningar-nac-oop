@@ -52,10 +52,10 @@ public class Server implements Runnable {
 
                     out.println("Connection established - Please enter contact name:");
 
+
                     String name = in.readLine();
-                    if (name == null) {
-                        Thread.currentThread().interrupt();
-                    }
+
+                    System.out.println("Recieved input: " + name);
 
                     String result = contactDAO.findContact(name);
 
