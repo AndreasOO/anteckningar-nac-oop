@@ -31,8 +31,8 @@ public class ReportSender implements Runnable {
             System.exit(0);
         }
 
-        gui.init();
         gui = new GUISender(title);
+        gui.init();
 
     }
 
