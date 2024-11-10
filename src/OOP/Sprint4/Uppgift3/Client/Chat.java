@@ -50,21 +50,13 @@ public class Chat implements Runnable {
                 status = Status.CONNECTED;
                 gui.getDisconnectButton().setText("Disconnect");
 
-                Object serverResponse;
-                while ((serverResponse = in.readObject()) != null) {
 
-                    Response serverResponseCast =  serverResponse instanceof Response ? (Response) serverResponse : null;
-
-                    switch (serverResponseCast.getResponseType()) {
-                        case BROADCAST -> gui.getTextArea().append(serverResponseCast.getPayload() + "\n");
-                        case LISTENING_CONNECTION_ESTABLISHED -> gui.getTextArea().append(serverResponseCast.getPayload() + "\n");
-                        case LISTENING_CONNECTION_TERMINATED -> {
-                            gui.getTextArea().append(serverResponseCast.getPayload() + "\n");
-                            return;
-                        }
+                while ((in.readObject()) instanceof Response response) {
+                    switch (response.getResponseType()) {
+                        case BROADCAST -> gui.getTextArea().append(response.getPayload() + "\n");
+                        case LISTENING_CONNECTION_ESTABLISHED -> gui.getTextArea().append(response.getPayload() + "\n");
+                        case LISTENING_CONNECTION_TERMINATED -> {return;}
                     }
-
-
                 }
 
             } catch (IOException e) {
@@ -81,6 +73,8 @@ public class Chat implements Runnable {
                 case CONNECTED -> sendMessage(gui.getTextField().getText());
                 case DISCONNECTED -> gui.getTextArea().append("Cannot send messages when disconnected\n");
             }
+            gui.getTextField().setText("");
+            gui.getTextField().requestFocus();
 
         });
 
