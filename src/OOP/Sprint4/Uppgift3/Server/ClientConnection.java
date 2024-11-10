@@ -30,20 +30,18 @@ public class ClientConnection implements Runnable {
 
     public void initializeClientConnection() {
 
-
         try {
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
 
+            if (in.readObject() instanceof Request request) {
 
-            Request request = (Request) in.readObject();
-
-            switch (request.getRequestType()) {
-                case LISTENING -> handleListeningRequest(request);
-                case MESSAGE -> handleMessageRequest(request);
-                case TERMINATION -> handleTerminationRequest(request);
+                switch (request.getRequestType()) {
+                    case LISTENING -> handleListeningRequest(request);
+                    case MESSAGE -> handleMessageRequest(request);
+                    case TERMINATION -> handleTerminationRequest(request);
+                }
             }
-
 
         } catch (IOException e) {
             e.printStackTrace();

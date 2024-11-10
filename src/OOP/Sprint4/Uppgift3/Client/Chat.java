@@ -47,18 +47,23 @@ public class Chat implements Runnable {
                  ObjectInputStream in = new ObjectInputStream((socket.getInputStream()));) {
 
                 out.writeObject(new Request(clientID, RequestType.LISTENING, username, ""));
-                status = Status.CONNECTED;
-                gui.getDisconnectButton().setText("Disconnect");
+
 
 
                 while ((in.readObject()) instanceof Response response) {
                     switch (response.getResponseType()) {
+
                         case BROADCAST -> gui.getTextArea().append(response.getPayload() + "\n");
-                        case LISTENING_CONNECTION_ESTABLISHED -> gui.getTextArea().append(response.getPayload() + "\n");
-                        case LISTENING_CONNECTION_TERMINATED -> {
+
+                        case LISTENING_CONNECTION_ESTABLISHED -> {
+                            status = Status.CONNECTED;
+                            gui.getDisconnectButton().setText("Disconnect");
                             gui.getTextArea().append(response.getPayload() + "\n");
-                            gui.getDisconnectButton().setText("Connect");
+                        }
+                        case LISTENING_CONNECTION_TERMINATED -> {
                             status = Status.DISCONNECTED;
+                            gui.getDisconnectButton().setText("Connect");
+                            gui.getTextArea().append(response.getPayload() + "\n");
                             return;}
                     }
                 }
