@@ -55,7 +55,11 @@ public class Chat implements Runnable {
                     switch (response.getResponseType()) {
                         case BROADCAST -> gui.getTextArea().append(response.getPayload() + "\n");
                         case LISTENING_CONNECTION_ESTABLISHED -> gui.getTextArea().append(response.getPayload() + "\n");
-                        case LISTENING_CONNECTION_TERMINATED -> {return;}
+                        case LISTENING_CONNECTION_TERMINATED -> {
+                            gui.getTextArea().append(response.getPayload() + "\n");
+                            gui.getDisconnectButton().setText("Connect");
+                            status = Status.DISCONNECTED;
+                            return;}
                     }
                 }
 
@@ -105,8 +109,7 @@ public class Chat implements Runnable {
              ObjectOutputStream out = new ObjectOutputStream((socket.getOutputStream()))) {
 
             out.writeObject(new Request(clientID, RequestType.TERMINATION, username, ""));
-            gui.getDisconnectButton().setText("Connect");
-            status = Status.DISCONNECTED;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
