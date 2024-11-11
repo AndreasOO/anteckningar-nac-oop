@@ -3,24 +3,33 @@ package OOP.Sprint4.Uppgift3.Server;
 import OOP.Sprint4.Uppgift3.Reponses.Response;
 import OOP.Sprint4.Uppgift3.Reponses.ResponseType;
 import OOP.Sprint4.Uppgift3.Requests.Request;
+import OOP.Sprint4.Uppgift3.Server.StateMachine.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class ClientConnection implements Runnable {
-    Socket socket;
-    Database database;
-    Server server;
-    ObjectOutputStream out;
-    ObjectInputStream in;
-    int clientID;
+public class ClientConnection implements Runnable, BroadCastRelay {
+    public Socket socket;
+    public Database database;
+    public Server server;
+    public ObjectOutputStream out;
+    public ObjectInputStream in;
+    public int clientID;
+    RequestHandlingState state;
+    RequestHandlingState listeningRequestState;
+    RequestHandlingState messageRequestState;
+    RequestHandlingState terminationRequestState;
+
 
     public ClientConnection(Socket socket, Database database, Server server) {
         this.socket = socket;
         this.database = database;
         this.server = server;
+        listeningRequestState = new ListeningRequestHandlingState(this);
+        messageRequestState = new MessageRequestHandlingState(this);
+        terminationRequestState = new TerminationRequestHandlingState(this);
     }
 
     @Override
@@ -37,9 +46,18 @@ public class ClientConnection implements Runnable {
             if (in.readObject() instanceof Request request) {
 
                 switch (request.getRequestType()) {
-                    case LISTENING -> handleListeningRequest(request);
-                    case MESSAGE -> handleMessageRequest(request);
-                    case TERMINATION -> handleTerminationRequest(request);
+                    case LISTENING -> {
+                        state = listeningRequestState;
+                        state.handleRequest(request);
+                    }
+                    case MESSAGE -> {
+                        state = messageRequestState;
+                        state.handleRequest(request);
+                    }
+                    case TERMINATION -> {
+                        state = terminationRequestState;
+                        state.handleRequest(request);
+                    }
                 }
             }
 
@@ -50,32 +68,6 @@ public class ClientConnection implements Runnable {
         }
     }
 
-    private void handleListeningRequest(Request request) throws IOException {
-        this.clientID = request.getClientID();
-        server.clients.add(this);
-        out.writeObject(new Response(ResponseType.LISTENING_CONNECTION_ESTABLISHED, "Welcome to the chat " + request.getUsername()));
-        server.broadcast(request.getUsername() + " has joined the chat :)");
-    }
-
-    private void handleMessageRequest(Request request) throws IOException {
-        String message = request.getUsername() + ": " +request.getPayload();
-        database.addMessage(message);
-        server.broadcast(message);
-        out.close();
-        in.close();
-    }
-
-    private void handleTerminationRequest(Request request) throws IOException {
-
-        ClientConnection clientConnectionToTerminate = server.clients.stream().filter(client -> client.getClientID() == request.getClientID()).findFirst().get();
-        clientConnectionToTerminate.out.writeObject(new Response(ResponseType.LISTENING_CONNECTION_TERMINATED,"Terminating connection" ));
-        clientConnectionToTerminate.out.close();
-        clientConnectionToTerminate.in.close();
-        server.clients.remove(clientConnectionToTerminate);
-        server.broadcast(request.getUsername() + " has left the chat :(");
-        out.close();
-        in.close();
-    }
 
     public void sendMessage(String message) throws IOException {
         out.writeObject(new Response(ResponseType.BROADCAST, message));
@@ -83,5 +75,9 @@ public class ClientConnection implements Runnable {
 
     public int getClientID() {
         return clientID;
+    }
+
+    public void setClientID(int clientID) {
+        this.clientID = clientID;
     }
 }

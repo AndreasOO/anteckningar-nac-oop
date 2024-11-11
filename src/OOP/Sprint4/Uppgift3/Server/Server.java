@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Server implements Runnable {
-    Database database;
-    int port;
-    Socket socket;
-    List<ClientConnection> clients;
+    public Database database;
+    public int port;
+    public Socket socket;
+    public List<ClientConnection> clients;
 
     public Server(int port) {
         database = new Database();
@@ -23,8 +23,9 @@ public class Server implements Runnable {
     }
 
     public void broadcast(String message) throws IOException {
-        for (ClientConnection client : clients) {
-            client.sendMessage(message);
+        for (BroadCastRelay relay : clients) {
+            relay.sendMessage(message);
+
         }
     }
 
