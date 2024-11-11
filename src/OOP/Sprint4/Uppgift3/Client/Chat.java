@@ -1,5 +1,8 @@
 package OOP.Sprint4.Uppgift3.Client;
 
+import OOP.Sprint4.Uppgift3.Client.StateMachine.ConnectedToServerState;
+import OOP.Sprint4.Uppgift3.Client.StateMachine.ConnectionState;
+import OOP.Sprint4.Uppgift3.Client.StateMachine.DisconnectedFromServer;
 import OOP.Sprint4.Uppgift3.Reponses.Response;
 import OOP.Sprint4.Uppgift3.Requests.Request;
 import OOP.Sprint4.Uppgift3.Requests.RequestType;
@@ -12,12 +15,15 @@ import java.net.UnknownHostException;
 
 public class Chat implements Runnable {
     private static int clientIDIncrementor = 1;
-    private final int clientID;
-    GUI gui;
-    InetAddress ip;
-    int port;
-    String username;
-    Status status;
+    public final int clientID;
+    public GUI gui;
+    public InetAddress ip;
+    public int port;
+    public String username;
+    public Status status;
+    public ConnectionState state;
+    public ConnectionState connectedToServerState;
+    public ConnectionState disconnectedFromServerState;
 
     public Chat(int port, String username) {
         try {
@@ -30,6 +36,9 @@ public class Chat implements Runnable {
         this.port = port;
         this.username = username;
 
+        connectedToServerState = new ConnectedToServerState(this);
+        disconnectedFromServerState = new DisconnectedFromServer(this);
+
     }
 
     public void run() {
@@ -40,7 +49,7 @@ public class Chat implements Runnable {
         addEventListeners();
     }
 
-    private void startServerListenerThread() {
+    public void startServerListenerThread() {
         new Thread(() -> {
             try (Socket socket = new Socket(ip,port);
                  ObjectOutputStream out = new ObjectOutputStream((socket.getOutputStream()));
@@ -57,11 +66,13 @@ public class Chat implements Runnable {
 
                         case LISTENING_CONNECTION_ESTABLISHED -> {
                             status = Status.CONNECTED;
+                            state = connectedToServerState;
                             gui.getDisconnectButton().setText("Disconnect");
                             gui.getTextArea().append(response.getPayload() + "\n");
                         }
                         case LISTENING_CONNECTION_TERMINATED -> {
                             status = Status.DISCONNECTED;
+                            state = disconnectedFromServerState;
                             gui.getDisconnectButton().setText("Connect");
                             gui.getTextArea().append(response.getPayload() + "\n");
                             return;}
@@ -78,10 +89,11 @@ public class Chat implements Runnable {
 
     public void addEventListeners() {
         gui.getTextField().addActionListener((e) -> {
-            switch (status) {
-                case CONNECTED -> sendMessage(gui.getTextField().getText());
-                case DISCONNECTED -> gui.getTextArea().append("Cannot send messages when disconnected\n");
-            }
+//            switch (status) {
+//                case CONNECTED -> sendMessage(gui.getTextField().getText());
+//                case DISCONNECTED -> gui.getTextArea().append("Cannot send messages when disconnected\n");
+//            }
+            state.sendMessage();
             gui.getTextField().setText("");
             gui.getTextField().requestFocus();
 
@@ -89,10 +101,11 @@ public class Chat implements Runnable {
 
         gui.getDisconnectButton().addActionListener((e) -> {
             if (e.getSource() == gui.getDisconnectButton()) {
-                switch (status) {
-                    case CONNECTED -> requestTermination();
-                    case DISCONNECTED -> startServerListenerThread();
-                }
+//                switch (status) {
+//                    case CONNECTED -> requestTermination();
+//                    case DISCONNECTED -> startServerListenerThread();
+//                }
+                state.toggleConnection();
             }
         });
     }
