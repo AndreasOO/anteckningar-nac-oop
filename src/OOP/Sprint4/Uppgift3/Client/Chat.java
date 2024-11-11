@@ -61,16 +61,14 @@ public class Chat implements Runnable {
 
                         case LISTENING_CONNECTION_ESTABLISHED -> {
                             state = connectedToServerState;
-                            gui.getDisconnectButton().setText("Disconnect");
-                            gui.getTextArea().append(response.getPayload() + "\n");
+                            state.handleResponse(response);
                         }
 
                         case BROADCAST -> gui.getTextArea().append(response.getPayload() + "\n");
 
                         case LISTENING_CONNECTION_TERMINATED -> {
                             state = disconnectedFromServerState;
-                            gui.getDisconnectButton().setText("Connect");
-                            gui.getTextArea().append(response.getPayload() + "\n");
+                            state.handleResponse(response);
                             return;}
                     }
                 }

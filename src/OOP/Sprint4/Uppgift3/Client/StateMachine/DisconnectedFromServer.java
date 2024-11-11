@@ -1,6 +1,7 @@
 package OOP.Sprint4.Uppgift3.Client.StateMachine;
 
 import OOP.Sprint4.Uppgift3.Client.Chat;
+import OOP.Sprint4.Uppgift3.Reponses.Response;
 
 public class DisconnectedFromServer implements ConnectionState {
     Chat chat;
@@ -9,6 +10,11 @@ public class DisconnectedFromServer implements ConnectionState {
         this.chat = chat;
     }
 
+    @Override
+    public void handleResponse(Response response) {
+        chat.gui.getDisconnectButton().setText("Connect");
+        chat.gui.getTextArea().append(response.getPayload() + "\n");
+    }
 
     @Override
     public void sendMessage() {
