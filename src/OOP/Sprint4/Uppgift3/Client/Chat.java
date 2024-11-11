@@ -20,7 +20,6 @@ public class Chat implements Runnable {
     public InetAddress ip;
     public int port;
     public String username;
-    public Status status;
     public ConnectionState state;
     public ConnectionState connectedToServerState;
     public ConnectionState disconnectedFromServerState;
