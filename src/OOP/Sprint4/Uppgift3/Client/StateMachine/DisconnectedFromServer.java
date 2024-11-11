@@ -13,6 +13,8 @@ public class DisconnectedFromServer implements ConnectionState {
     @Override
     public void sendMessage() {
         chat.gui.getTextArea().append("Cannot send messages when disconnected\n");
+        chat.gui.getTextField().setText("");
+        chat.gui.getTextField().requestFocus();
     }
 
     @Override

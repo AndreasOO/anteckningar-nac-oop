@@ -57,21 +57,17 @@ public class Chat implements Runnable {
 
                 out.writeObject(new Request(clientID, RequestType.LISTENING, username, ""));
 
-
-
                 while ((in.readObject()) instanceof Response response) {
                     switch (response.getResponseType()) {
 
                         case BROADCAST -> gui.getTextArea().append(response.getPayload() + "\n");
 
                         case LISTENING_CONNECTION_ESTABLISHED -> {
-                            status = Status.CONNECTED;
                             state = connectedToServerState;
                             gui.getDisconnectButton().setText("Disconnect");
                             gui.getTextArea().append(response.getPayload() + "\n");
                         }
                         case LISTENING_CONNECTION_TERMINATED -> {
-                            status = Status.DISCONNECTED;
                             state = disconnectedFromServerState;
                             gui.getDisconnectButton().setText("Connect");
                             gui.getTextArea().append(response.getPayload() + "\n");
@@ -89,49 +85,13 @@ public class Chat implements Runnable {
 
     public void addEventListeners() {
         gui.getTextField().addActionListener((e) -> {
-//            switch (status) {
-//                case CONNECTED -> sendMessage(gui.getTextField().getText());
-//                case DISCONNECTED -> gui.getTextArea().append("Cannot send messages when disconnected\n");
-//            }
             state.sendMessage();
-            gui.getTextField().setText("");
-            gui.getTextField().requestFocus();
-
         });
 
         gui.getDisconnectButton().addActionListener((e) -> {
             if (e.getSource() == gui.getDisconnectButton()) {
-//                switch (status) {
-//                    case CONNECTED -> requestTermination();
-//                    case DISCONNECTED -> startServerListenerThread();
-//                }
                 state.toggleConnection();
             }
         });
     }
-
-    public void sendMessage(String message) {
-
-        try (Socket socket = new Socket(ip,port);
-             ObjectOutputStream out = new ObjectOutputStream((socket.getOutputStream()))) {
-
-            out.writeObject(new Request(clientID, RequestType.MESSAGE, username, message));
-
-        } catch (Exception e) {
-                e.printStackTrace();
-        }
-    }
-
-    public void requestTermination() {
-        try (Socket socket = new Socket(ip,port);
-             ObjectOutputStream out = new ObjectOutputStream((socket.getOutputStream()))) {
-
-            out.writeObject(new Request(clientID, RequestType.TERMINATION, username, ""));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
 }

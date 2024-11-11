@@ -22,7 +22,8 @@ public class ConnectedToServerState implements ConnectionState {
              ObjectOutputStream out = new ObjectOutputStream((socket.getOutputStream()))) {
 
             out.writeObject(new Request(chat.clientID, RequestType.MESSAGE, chat.username, message));
-
+            chat.gui.getTextField().setText("");
+            chat.gui.getTextField().requestFocus();
         } catch (Exception e) {
             e.printStackTrace();
         }
