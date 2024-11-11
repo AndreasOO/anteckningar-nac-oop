@@ -20,12 +20,24 @@ public class TerminationRequestHandlingState implements RequestHandlingState {
                                                              .findFirst()
                                                              .get();
 
+
+        connection.server.broadcastMessage(request.getUsername() + " has left the chat :(");
         clientConnectionToTerminate.out.writeObject(new Response(ResponseType.LISTENING_CONNECTION_TERMINATED,"Terminating connection" ));
         clientConnectionToTerminate.out.close();
         clientConnectionToTerminate.in.close();
         connection.server.clients.remove(clientConnectionToTerminate);
-        connection.server.broadcast(request.getUsername() + " has left the chat :(");
+        connection.server.broadCastUserLogout(createUsersOnlineDTO());
         connection.out.close();
         connection.in.close();
+    }
+
+    private String createUsersOnlineDTO() {
+        StringBuilder sb = new StringBuilder();
+        for (ClientConnection client : connection.server.clients) {
+            sb.append(client.getUsername());
+            sb.append(" ");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
     }
 }

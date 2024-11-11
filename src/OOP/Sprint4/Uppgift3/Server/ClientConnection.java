@@ -17,6 +17,7 @@ public class ClientConnection implements Runnable, BroadCastRelay {
     public ObjectOutputStream out;
     public ObjectInputStream in;
     public int clientID;
+    public String username;
     RequestHandlingState state;
     RequestHandlingState listeningRequestState;
     RequestHandlingState messageRequestState;
@@ -73,11 +74,27 @@ public class ClientConnection implements Runnable, BroadCastRelay {
         out.writeObject(new Response(ResponseType.BROADCAST, message));
     }
 
+    public void notifyUserLogin(String user) throws IOException {
+        out.writeObject(new Response(ResponseType.USER_LOGIN, user));
+    }
+
+    public void notifyUserLogout(String user) throws IOException {
+        out.writeObject(new Response(ResponseType.USER_LOGOUT, user));
+    }
+
     public int getClientID() {
         return clientID;
     }
 
     public void setClientID(int clientID) {
         this.clientID = clientID;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

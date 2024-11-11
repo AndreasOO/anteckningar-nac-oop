@@ -1,16 +1,19 @@
 package OOP.Sprint4.Uppgift3.Client;
 
-import OOP.Sprint4.Uppgift3.Client.StateMachine.ConnectedToServerState;
+import OOP.Sprint4.Uppgift3.Client.StateMachine.ConnectedToServer;
 import OOP.Sprint4.Uppgift3.Client.StateMachine.ConnectionState;
 import OOP.Sprint4.Uppgift3.Client.StateMachine.DisconnectedFromServer;
 import OOP.Sprint4.Uppgift3.Reponses.Response;
 import OOP.Sprint4.Uppgift3.Requests.Request;
 import OOP.Sprint4.Uppgift3.Requests.RequestType;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Chat implements Runnable {
@@ -20,6 +23,7 @@ public class Chat implements Runnable {
     public InetAddress ip;
     public int port;
     public String username;
+    public List<String> usersOnline;
     public ConnectionState state;
     public ConnectionState connectedToServerState;
     public ConnectionState disconnectedFromServerState;
@@ -34,8 +38,9 @@ public class Chat implements Runnable {
         this.clientID = clientIDIncrementor++;
         this.port = port;
         this.username = username;
+        this.usersOnline = new ArrayList<>();
 
-        connectedToServerState = new ConnectedToServerState(this);
+        connectedToServerState = new ConnectedToServer(this);
         disconnectedFromServerState = new DisconnectedFromServer(this);
 
     }
@@ -66,13 +71,16 @@ public class Chat implements Runnable {
 
                         case BROADCAST -> state.handleBroadcast(response);
 
+                        case USER_LOGIN -> state.handleUserLogin(response);
+
+                        case USER_LOGOUT -> state.handleUserLogout(response);
+
                         case LISTENING_CONNECTION_TERMINATED -> {
                             state = disconnectedFromServerState;
                             state.handleResponse(response);
                             return;}
                     }
                 }
-
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
@@ -91,5 +99,18 @@ public class Chat implements Runnable {
                 state.toggleConnection();
             }
         });
+    }
+
+    public void updateUsersOnline() {
+        gui.getRightPanel().removeAll();
+
+        gui.getRightPanel().add(new JLabel("  Users Online   "));
+        gui.getRightPanel().add(new JLabel("___________________"));
+
+        for (String userInList : usersOnline) {
+            gui.getRightPanel().add(new JLabel(userInList));
+        }
+        gui.getFrame().repaint();
+        gui.getFrame().revalidate();
     }
 }

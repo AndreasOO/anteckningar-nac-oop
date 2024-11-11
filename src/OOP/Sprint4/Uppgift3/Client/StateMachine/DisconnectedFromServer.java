@@ -3,6 +3,8 @@ package OOP.Sprint4.Uppgift3.Client.StateMachine;
 import OOP.Sprint4.Uppgift3.Client.Chat;
 import OOP.Sprint4.Uppgift3.Reponses.Response;
 
+import javax.swing.*;
+
 public class DisconnectedFromServer implements ConnectionState {
     Chat chat;
 
@@ -31,6 +33,16 @@ public class DisconnectedFromServer implements ConnectionState {
 
     @Override
     public void handleBroadcast(Response response) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void handleUserLogin(Response response) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void handleUserLogout(Response response) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

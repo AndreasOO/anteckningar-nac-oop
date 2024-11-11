@@ -8,4 +8,6 @@ public interface ConnectionState {
     void toggleConnection();
     void handleResponse(Response response);
     void handleBroadcast(Response response);
+    void handleUserLogin(Response response);
+    void handleUserLogout(Response response);
 }

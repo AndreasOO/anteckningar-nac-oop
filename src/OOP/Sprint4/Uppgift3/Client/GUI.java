@@ -10,6 +10,7 @@ public class GUI {
     JPanel topPanel;
     JPanel centerPanel;
     JPanel bottomPanel;
+    JPanel rightPanel;
     JTextArea textArea;
     JScrollPane scrollPane;
     JButton disconnectButton;
@@ -23,6 +24,7 @@ public class GUI {
         topPanel = new JPanel();
         centerPanel = new JPanel();
         bottomPanel = new JPanel();
+        rightPanel = new JPanel();
         textArea  = new JTextArea();
         scrollPane  = new JScrollPane(textArea);
         disconnectButton = new JButton("Disconnect");
@@ -40,6 +42,7 @@ public class GUI {
         mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+        mainPanel.add(rightPanel, BorderLayout.EAST);
 
         topPanel.setLayout(new GridLayout(1,1));
         topPanel.add(disconnectButton);
@@ -47,9 +50,12 @@ public class GUI {
         centerPanel.setLayout(new GridLayout(1,1));
         centerPanel.add(scrollPane);
 
-
         bottomPanel.setLayout(new GridLayout(1,1));
         bottomPanel.add(textField);
+
+        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+        rightPanel.add(new JLabel("  Users Online   "));
+        rightPanel.add(new JLabel("___________________"));
 
     }
 
@@ -61,6 +67,13 @@ public class GUI {
         return textArea;
     }
 
+    public JPanel getRightPanel() {
+        return rightPanel;
+    }
+
+    public JFrame getFrame() {
+        return frame;
+    }
 
     public JButton getDisconnectButton() {
         return disconnectButton;

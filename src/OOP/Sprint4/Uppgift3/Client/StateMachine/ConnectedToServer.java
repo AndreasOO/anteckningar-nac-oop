@@ -5,13 +5,15 @@ import OOP.Sprint4.Uppgift3.Reponses.Response;
 import OOP.Sprint4.Uppgift3.Requests.Request;
 import OOP.Sprint4.Uppgift3.Requests.RequestType;
 
+import javax.swing.*;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.List;
 
-public class ConnectedToServerState implements ConnectionState {
+public class ConnectedToServer implements ConnectionState {
     Chat chat;
 
-    public ConnectedToServerState(Chat chat) {
+    public ConnectedToServer(Chat chat) {
         this.chat = chat;
     }
 
@@ -44,6 +46,10 @@ public class ConnectedToServerState implements ConnectionState {
 
             out.writeObject(new Request(chat.clientID, RequestType.TERMINATION, chat.username, ""));
 
+            chat.gui.getRightPanel().removeAll();
+
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -53,5 +59,19 @@ public class ConnectedToServerState implements ConnectionState {
     @Override
     public void handleBroadcast(Response response) {
         chat.gui.getTextArea().append(response.getPayload() + "\n");
+    }
+
+    @Override
+    public void handleUserLogin(Response response) {
+
+        chat.usersOnline = List.of(response.getPayload().split(" "));
+        chat.updateUsersOnline();
+
+    }
+
+    @Override
+    public void handleUserLogout(Response response) {
+        chat.usersOnline = List.of(response.getPayload().split(" "));
+        chat.updateUsersOnline();
     }
 }

@@ -22,10 +22,21 @@ public class Server implements Runnable {
         startServer();
     }
 
-    public void broadcast(String message) throws IOException {
+    public void broadcastMessage(String message) throws IOException {
         for (BroadCastRelay relay : clients) {
             relay.sendMessage(message);
+        }
+    }
 
+    public void broadCastUserLogin(String user) throws IOException {
+        for (BroadCastRelay relay : clients) {
+            relay.notifyUserLogin(user);
+        }
+    }
+
+    public void broadCastUserLogout(String user) throws IOException {
+        for (BroadCastRelay relay : clients) {
+            relay.notifyUserLogout(user);
         }
     }
 
