@@ -3,11 +3,10 @@ package OOP.Sprint4.Uppgift15a_b;
 public class Main {
     public static void main(String[] args) {
 
-        Queue<Number> queue = new Queue<>();
+        Queue<Integer> queue = new Queue<>();
         queue.put(5);
         queue.put(6);
         queue.put(7);
-        queue.put(8.2);
 
         System.out.println(queue.size());
 
@@ -17,7 +16,7 @@ public class Main {
 //        System.out.println(queue.take());
 //        System.out.println(queue.take());
 
-        Queue<? extends Number> queue2 = queue.transfer();
+        Queue<Integer> queue2 = queue.reverse();
 
         System.out.println();
 

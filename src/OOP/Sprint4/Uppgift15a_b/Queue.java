@@ -25,7 +25,7 @@ public class Queue <T extends Number> {
         return list.isEmpty();
     }
 
-    public Queue<? extends Number> transfer() {
+    public Queue<T> reverse() {
         Queue<T> newQueue = new Queue<>();
         while (!this.isEmpty()) {
             newQueue.put(this.take());
