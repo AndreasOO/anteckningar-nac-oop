@@ -10,8 +10,8 @@ public class Queue <T extends Number> {
         list = new ArrayList<>();
     }
 
-    public void put(T number)  {
-        list.addFirst(number);
+    public void put(Number number)  {
+        list.addFirst((T) number);
     }
     public T take() {
         return list.removeFirst();
@@ -25,10 +25,10 @@ public class Queue <T extends Number> {
         return list.isEmpty();
     }
 
-    public Queue<T> reverse() {
-        Queue<T> newQueue = new Queue<>();
-        while (!this.isEmpty()) {
-            newQueue.put(this.take());
+    static public Queue<? extends Number> reverse(Queue<? extends Number> queue) {
+        Queue<?> newQueue = new Queue<>();
+        while (!queue.isEmpty()) {
+            newQueue.put(queue.take());
         }
         return newQueue;
     }
