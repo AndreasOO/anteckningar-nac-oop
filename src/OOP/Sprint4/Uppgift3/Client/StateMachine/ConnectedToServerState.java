@@ -49,4 +49,9 @@ public class ConnectedToServerState implements ConnectionState {
         }
 
     }
+
+    @Override
+    public void handleBroadcast(Response response) {
+        chat.gui.getTextArea().append(response.getPayload() + "\n");
+    }
 }

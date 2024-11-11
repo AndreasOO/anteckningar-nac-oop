@@ -28,4 +28,9 @@ public class DisconnectedFromServer implements ConnectionState {
         chat.startServerListenerThread();
 
     }
+
+    @Override
+    public void handleBroadcast(Response response) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

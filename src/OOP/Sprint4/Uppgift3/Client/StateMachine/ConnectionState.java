@@ -7,4 +7,5 @@ public interface ConnectionState {
     void sendMessage();
     void toggleConnection();
     void handleResponse(Response response);
+    void handleBroadcast(Response response);
 }

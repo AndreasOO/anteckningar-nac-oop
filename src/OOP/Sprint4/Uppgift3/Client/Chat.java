@@ -64,7 +64,7 @@ public class Chat implements Runnable {
                             state.handleResponse(response);
                         }
 
-                        case BROADCAST -> gui.getTextArea().append(response.getPayload() + "\n");
+                        case BROADCAST -> state.handleBroadcast(response);
 
                         case LISTENING_CONNECTION_TERMINATED -> {
                             state = disconnectedFromServerState;
