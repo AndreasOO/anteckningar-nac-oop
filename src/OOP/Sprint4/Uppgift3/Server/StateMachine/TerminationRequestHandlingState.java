@@ -26,18 +26,8 @@ public class TerminationRequestHandlingState implements RequestHandlingState {
         clientConnectionToTerminate.out.close();
         clientConnectionToTerminate.in.close();
         connection.server.clients.remove(clientConnectionToTerminate);
-        connection.server.broadCastUserLogout(createUsersOnlineDTO());
+        connection.server.broadcastUpdatedOnlineUsersList();
         connection.out.close();
         connection.in.close();
-    }
-
-    private String createUsersOnlineDTO() {
-        StringBuilder sb = new StringBuilder();
-        for (ClientConnection client : connection.server.clients) {
-            sb.append(client.getUsername());
-            sb.append(" ");
-        }
-        sb.deleteCharAt(sb.length() - 1);
-        return sb.toString();
     }
 }

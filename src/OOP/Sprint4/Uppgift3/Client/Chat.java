@@ -71,9 +71,8 @@ public class Chat implements Runnable {
 
                         case BROADCAST -> state.handleBroadcast(response);
 
-                        case USER_LOGIN -> state.handleUserLogin(response);
+                        case ONLINE_USERS_UPDATE -> state.handleUserOnlineListUpdate(response);
 
-                        case USER_LOGOUT -> state.handleUserLogout(response);
 
                         case LISTENING_CONNECTION_TERMINATED -> {
                             state = disconnectedFromServerState;

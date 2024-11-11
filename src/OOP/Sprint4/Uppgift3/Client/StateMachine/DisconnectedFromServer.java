@@ -37,7 +37,7 @@ public class DisconnectedFromServer implements ConnectionState {
     }
 
     @Override
-    public void handleUserLogin(Response response) {
+    public void handleUserOnlineListUpdate(Response response) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

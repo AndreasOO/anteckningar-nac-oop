@@ -20,16 +20,6 @@ public class ListeningRequestHandlingState implements RequestHandlingState {
         connection.server.clients.add(connection);
         connection.out.writeObject(new Response(ResponseType.LISTENING_CONNECTION_ESTABLISHED, "Welcome to the chat " + request.getUsername()));
         connection.server.broadcastMessage(request.getUsername() + " has joined the chat :)");
-        connection.server.broadCastUserLogin(createUsersOnlineDTO());
-    }
-
-    private String createUsersOnlineDTO() {
-        StringBuilder sb = new StringBuilder();
-        for (ClientConnection client : connection.server.clients) {
-            sb.append(client.getUsername());
-            sb.append(" ");
-        }
-        sb.deleteCharAt(sb.length() - 1);
-        return sb.toString();
+        connection.server.broadcastUpdatedOnlineUsersList();
     }
 }

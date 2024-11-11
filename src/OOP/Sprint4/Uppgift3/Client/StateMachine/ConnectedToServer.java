@@ -62,7 +62,7 @@ public class ConnectedToServer implements ConnectionState {
     }
 
     @Override
-    public void handleUserLogin(Response response) {
+    public void handleUserOnlineListUpdate(Response response) {
 
         chat.usersOnline = List.of(response.getPayload().split(" "));
         chat.updateUsersOnline();

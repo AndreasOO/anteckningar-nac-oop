@@ -22,24 +22,6 @@ public class Server implements Runnable {
         startServer();
     }
 
-    public void broadcastMessage(String message) throws IOException {
-        for (BroadCastRelay relay : clients) {
-            relay.sendMessage(message);
-        }
-    }
-
-    public void broadCastUserLogin(String user) throws IOException {
-        for (BroadCastRelay relay : clients) {
-            relay.notifyUserLogin(user);
-        }
-    }
-
-    public void broadCastUserLogout(String user) throws IOException {
-        for (BroadCastRelay relay : clients) {
-            relay.notifyUserLogout(user);
-        }
-    }
-
     public void startServer() {
         try (ServerSocket ss = new ServerSocket(port)) {
             System.out.println("Server started");
@@ -52,6 +34,29 @@ public class Server implements Runnable {
             System.out.println("Server stopped");
             throw new RuntimeException(e);
         }
+    }
+
+    public void broadcastMessage(String message) throws IOException {
+        for (BroadCastRelay relay : clients) {
+            relay.sendMessage(message);
+        }
+    }
+
+    public void broadcastUpdatedOnlineUsersList() throws IOException {
+        String userList = createUsersOnlineDTO();
+        for (BroadCastRelay relay : clients) {
+            relay.updateOnlineUsersList(userList);
+        }
+    }
+
+    private String createUsersOnlineDTO() {
+        StringBuilder sb = new StringBuilder();
+        for (ClientConnection client : clients) {
+            sb.append(client.getUsername());
+            sb.append(" ");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
     }
 
 }
