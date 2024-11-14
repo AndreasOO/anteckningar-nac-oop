@@ -5,10 +5,12 @@ import OOP.Sprint2.Uppgift14.PersonsCreation.BankStaff;
 
 import java.io.*;
 import java.util.ArrayList;
+
 import java.util.List;
 
 public class StorageLoader {
     private final List<BankStaff> bankStaffList;
+
     private final List<BankCustomer> bankCustomerList;
 
 
@@ -54,6 +56,9 @@ public class StorageLoader {
             e.printStackTrace();
         }
     }
+
+
+
 
     public static StorageLoader getInstance() {
         return STORAGE_LOADER_INSTANCE;
