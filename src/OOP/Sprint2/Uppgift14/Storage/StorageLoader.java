@@ -42,6 +42,8 @@ public class StorageLoader {
         }
 // what is
         // this line?
+        // and now?
+
 
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("src/OOP/Sprint2/Uppgift14/Storage/bankcustomers.ser"))) {
             while (objectInputStream.readObject() instanceof BankCustomer customerObjectToLoad) {
