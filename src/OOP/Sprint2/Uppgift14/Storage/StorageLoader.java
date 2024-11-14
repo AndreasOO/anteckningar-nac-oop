@@ -40,9 +40,9 @@ public class StorageLoader {
 
 
         }
-// what is
-        // this line?
-        // and now?
+        // hello
+        // hello 2
+        // hello 3
 
 
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("src/OOP/Sprint2/Uppgift14/Storage/bankcustomers.ser"))) {
