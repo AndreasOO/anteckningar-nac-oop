@@ -33,7 +33,8 @@ public class StorageLoader {
 
             System.out.println("Hit end of File bankstaff.ser");
         } catch (IOException e) {
-         e.printStackTrace();
+
+            e.printStackTrace();
 
 
         }
