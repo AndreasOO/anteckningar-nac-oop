@@ -59,6 +59,8 @@ public class StorageLoader {
         return bankStaffList;
     }
 
+
+
     public List<BankCustomer> getBankCustomerList() {
         return bankCustomerList;
     }
