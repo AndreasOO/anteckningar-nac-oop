@@ -10,6 +10,7 @@ import java.util.List;
 
 public class StorageLoader {
     private final List<BankStaff> bankStaffList;
+
     private final List<BankCustomer> bankCustomerList;
 
 
